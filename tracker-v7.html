@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Meu Treino</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── TEMAS ── */
+:root {
+  --accent:      #8b5cf6;
+  --accent2:     #a78bfa;
+  --accent-dim:  rgba(139,92,246,0.12);
+  --accent-dim2: rgba(139,92,246,0.07);
+  --accent-text: #6d28d9;
+}
+[data-theme="azul"] {
+  --accent:      #3b82f6;
+  --accent2:     #60a5fa;
+  --accent-dim:  rgba(59,130,246,0.12);
+  --accent-dim2: rgba(59,130,246,0.07);
+  --accent-text: #1d4ed8;
+}
+[data-theme="verde"] {
+  --accent:      #10b981;
+  --accent2:     #34d399;
+  --accent-dim:  rgba(16,185,129,0.12);
+  --accent-dim2: rgba(16,185,129,0.07);
+  --accent-text: #047857;
+}
+[data-theme="laranja"] {
+  --accent:      #f97316;
+  --accent2:     #fb923c;
+  --accent-dim:  rgba(249,115,22,0.12);
+  --accent-dim2: rgba(249,115,22,0.07);
+  --accent-text: #c2410c;
+}
+[data-theme="rosa"] {
+  --accent:      #ec4899;
+  --accent2:     #f472b6;
+  --accent-dim:  rgba(236,72,153,0.12);
+  --accent-dim2: rgba(236,72,153,0.07);
+  --accent-text: #be185d;
+}
+
+/* ── BASE ── */
+:root {
+  --bg:       #f5f5f7;
+  --surface:  #ffffff;
+  --surface2: #f0f0f3;
+  --surface3: #e8e8ed;
+  --border:   #e2e2e8;
+  --text:     #1a1a2e;
+  --text2:    #6b6b80;
+  --text3:    #a0a0b0;
+  --bad:      #ef4444;
+  --bad-dim:  rgba(239,68,68,0.1);
+  --good:     #10b981;
+  --shadow:   0 2px 12px rgba(0,0,0,0.06);
+  --shadow2:  0 8px 32px rgba(0,0,0,0.10);
+  --radius:   18px;
+  --radius-sm:12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── LAYOUT ── */
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.screen {
+  display: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 0 80px;
+  -webkit-overflow-scrolling: touch;
+}
+.screen.active { display: block; }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 430px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 0 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text3);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-btn .nav-icon { font-size: 20px; line-height: 1; transition: transform 0.2s; }
+.nav-btn.active { color: var(--accent); }
+.nav-btn.active .nav-icon { transform: scale(1.15); }
+
+/* ── FAB ── */
+.fab {
+  position: fixed;
+  bottom: 72px;
+  right: 20px;
+  transform: none;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 26px;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 99;
+  line-height: 1;
+}
+.fab:active { transform: scale(0.93); }
+
+/* ── HOME SCREEN ── */
+.home-header {
+  padding: 52px 20px 20px;
+  background: var(--surface);
+}
+
+.home-greeting {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.home-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+.home-title span { color: var(--accent); }
+
+/* ── CALENDÁRIO ── */
+.cal-wrap {
+  margin: 14px 16px 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cal-month {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cal-nav {
+  display: flex; gap: 4px;
+}
+.cal-nav button {
+  background: var(--surface2);
+  border: none;
+  border-radius: 8px;
+  width: 30px; height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text2);
+  transition: all 0.15s;
+}
+.cal-nav button:hover { background: var(--accent-dim); color: var(--accent); }
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
+}
+.cal-weekday {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 0;
+}
+
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  gap: 2px;
+}
+.cal-day:hover { background: var(--surface2); }
+.cal-day.empty { cursor: default; }
+.cal-day.today {
+  background: var(--accent-dim);
+}
+.cal-day.today .cal-day-num { color: var(--accent); font-weight: 700; }
+.cal-day.has-activity { cursor: pointer; }
+
+.cal-day-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1;
+}
+.cal-day.other-month .cal-day-num { color: var(--text3); }
+
+.cal-dots {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 28px;
+}
+.cal-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── TODAY ACTIVITIES ── */
+.today-section {
+  margin: 14px 16px 0;
+}
+
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+
+.today-empty {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.today-empty-icon { font-size: 32px; margin-bottom: 8px; }
+.today-empty-text { font-size: 14px; color: var(--text2); }
+
+.registro-card {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: slideIn 0.2s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.registro-color {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.registro-body { flex: 1; min-width: 0; }
+.registro-nome {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--text);
+}
+.registro-meta {
+  font-size: 12px; color: var(--text2);
+  margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.registro-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.registro-action-btn {
+  background: none; border: none;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer; color: var(--text3);
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.registro-action-btn:hover { background: var(--surface2); color: var(--text); }
+.registro-action-btn.del:hover { background: var(--bad-dim); color: var(--bad); }
+
+/* ── HISTÓRICO ── */
+.hist-header {
+  padding: 52px 20px 16px;
+  background: var(--surface);
+}
+.hist-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px; font-weight: 700;
+  color: var(--text);
+}
+
+.hist-totais {
+  display: flex; gap: 8px;
+  margin: 14px 16px 0;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.hist-totais::-webkit-scrollbar { display: none; }
+
+.total-chip {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+  min-width: 100px;
+}
+.total-chip-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--accent);
+}
+.total-chip-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.hist-filters {
+  display: flex; gap: 8px;
+  margin: 14px 16px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hist-filters::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  white-space: nowrap; flex-shrink: 0;
+}
+.filter-chip:hover { border-color: var(--accent); color: var(--accent); }
+.filter-chip.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
+
+.hist-export-btn {
+  margin: 12px 16px 0;
+  width: calc(100% - 32px);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.hist-export-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim2); }
+
+.hist-list { margin: 12px 16px 0; display: flex; flex-direction: column; gap: 8px; }
+
+.hist-empty {
+  text-align: center; padding: 50px 20px;
+  color: var(--text3); font-size: 15px;
+}
+.hist-empty-icon { font-size: 40px; margin-bottom: 10px; }
+
+/* ── ATIVIDADES ── */
+.ativ-header {
+  padding: 52px 20px 16px;
+  background: var(--surface);
+}
+.ativ-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px; font-weight: 700; color: var(--text);
+}
+.ativ-sub { font-size: 13px; color: var(--text2); margin-top: 4px; }
+
+.ativ-list { margin: 14px 16px 0; display: flex; flex-direction: column; gap: 8px; }
+
+.ativ-card {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 12px;
+  animation: slideIn 0.2s ease;
+}
+.ativ-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.ativ-body { flex: 1; }
+.ativ-nome { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); }
+.ativ-metricas { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.ativ-actions { display: flex; gap: 4px; }
+.ativ-action-btn {
+  background: none; border: none;
+  width: 32px; height: 32px;
+  border-radius: 8px; font-size: 15px;
+  cursor: pointer; color: var(--text3);
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.ativ-action-btn:hover { background: var(--surface2); color: var(--text); }
+.ativ-action-btn.del:hover { background: var(--bad-dim); color: var(--bad); }
+
+.ativ-empty {
+  margin: 40px 16px;
+  text-align: center;
+  color: var(--text3);
+}
+.ativ-empty-icon { font-size: 44px; margin-bottom: 12px; }
+.ativ-empty-text { font-size: 15px; margin-bottom: 4px; color: var(--text2); }
+.ativ-empty-sub  { font-size: 13px; }
+
+/* ── CONFIGS ── */
+.cfg-header {
+  padding: 52px 20px 16px;
+  background: var(--surface);
+}
+.cfg-title { font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: var(--text); }
+
+.cfg-section { margin: 14px 16px 0; }
+.cfg-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 10px; padding: 0 2px;
+}
+
+.theme-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.theme-btn {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.theme-btn.active { border-color: var(--text); }
+.theme-btn.active::after {
+  content: '✓';
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border-radius: 24px 24px 0 0;
+  width: 100%; max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 8px 20px 40px;
+  animation: slideUp 0.3s cubic-bezier(0.34,1.2,0.64,1);
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.modal-handle {
+  width: 40px; height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 10px auto 20px;
+}
+
+.modal-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--text); margin-bottom: 20px;
+}
+
+/* ── FORM ── */
+.field { margin-bottom: 16px; }
+.field label {
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--text2); margin-bottom: 7px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
+  width: 100%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.18s;
+  appearance: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+input::placeholder, textarea::placeholder { color: var(--text3); font-weight: 400; }
+textarea { resize: none; min-height: 72px; }
+
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: '▾';
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3); pointer-events: none; font-size: 12px;
+}
+
+/* Opções de toggle */
+.toggle-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.toggle-opt {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.toggle-opt.selected { background: var(--accent-dim); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
+
+/* Emoji picker */
+.emoji-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+}
+.emoji-opt {
+  aspect-ratio: 1; border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  font-size: 20px; cursor: pointer;
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.emoji-opt.selected { border-color: var(--accent); background: var(--accent-dim); }
+
+/* Color picker */
+.color-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+.color-opt {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  border: 2.5px solid transparent;
+  cursor: pointer; transition: all 0.15s;
+}
+.color-opt.selected { border-color: var(--text); transform: scale(1.1); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+/* Tags de tipo */
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-item {
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px 10px;
+  background: var(--accent-dim);
+  border: 1.5px solid var(--accent);
+  border-radius: 20px;
+  font-size: 12px; font-weight: 600; color: var(--accent-text);
+}
+.tag-remove {
+  background: none; border: none; cursor: pointer;
+  color: var(--accent-text); font-size: 14px; line-height: 1;
+  padding: 0; margin-left: 2px;
+}
+.tag-add-wrap { display: flex; gap: 6px; margin-top: 8px; }
+.tag-add-wrap input { flex: 1; }
+.tag-add-btn {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff; border: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+
+/* Intensidade */
+.intensidade-opts { display: flex; gap: 8px; }
+.intens-btn {
+  flex: 1; padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; text-align: center;
+  transition: all 0.15s; color: var(--text2);
+}
+.intens-btn.selected.leve   { background: rgba(16,185,129,0.12); border-color: #10b981; color: #047857; }
+.intens-btn.selected.medio  { background: rgba(249,115,22,0.12); border-color: #f97316; color: #c2410c; }
+.intens-btn.selected.intenso{ background: rgba(239,68,68,0.12);  border-color: #ef4444; color: #b91c1c; }
+
+/* Humor */
+.humor-opts { display: flex; gap: 8px; justify-content: space-between; }
+.humor-btn {
+  flex: 1; padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  font-size: 20px; cursor: pointer;
+  text-align: center; transition: all 0.15s;
+}
+.humor-btn.selected { border-color: var(--accent); background: var(--accent-dim); }
+
+/* Btns */
+.btn-primary {
+  width: 100%; padding: 15px;
+  border-radius: var(--radius-sm);
+  background: var(--accent); color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 700;
+  border: none; cursor: pointer;
+  transition: all 0.18s; margin-top: 8px;
+}
+.btn-primary:active { transform: scale(0.98); }
+.btn-secondary {
+  width: 100%; padding: 13px;
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text2);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px; font-weight: 500;
+  cursor: pointer; margin-top: 8px; transition: all 0.15s;
+}
+
+/* Divider */
+.divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+/* Streak */
+.streak-bar {
+  margin: 14px 16px 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 14px;
+}
+.streak-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 36px; font-weight: 800;
+  color: var(--accent); line-height: 1;
+}
+.streak-body { flex: 1; }
+.streak-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.streak-sub   { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.streak-icon  { font-size: 28px; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ══ HOME ══ -->
+  <div class="screen active" id="screen-home">
+    <div class="home-header">
+      <div class="home-greeting" id="greeting">Bom dia</div>
+      <div class="home-title">Como foi seu <span>dia</span>?</div>
+    </div>
+
+    <!-- Streak -->
+    <div class="streak-bar" id="streakBar">
+      <div class="streak-num" id="streakNum">0</div>
+      <div class="streak-body">
+        <div class="streak-label">dias seguidos</div>
+        <div class="streak-sub" id="streakSub">Registre sua primeira atividade!</div>
+      </div>
+      <div class="streak-icon">🔥</div>
+    </div>
+
+    <!-- Calendário -->
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <div class="cal-month" id="calMonth">Março 2025</div>
+        <div class="cal-nav">
+          <button onclick="navCal(-1)">‹</button>
+          <button onclick="navCal(1)">›</button>
+        </div>
+      </div>
+      <div class="cal-weekdays">
+        <div class="cal-weekday">D</div><div class="cal-weekday">S</div>
+        <div class="cal-weekday">T</div><div class="cal-weekday">Q</div>
+        <div class="cal-weekday">Q</div><div class="cal-weekday">S</div>
+        <div class="cal-weekday">S</div>
+      </div>
+      <div class="cal-days" id="calDays"></div>
+    </div>
+
+    <!-- Hoje -->
+    <div class="today-section">
+      <div class="section-title" id="todayLabel">Hoje</div>
+      <div id="todayList"></div>
+    </div>
+  </div>
+
+  <!-- ══ RESUMO ══ -->
+  <div class="screen" id="screen-hist">
+    <div class="hist-header">
+      <div class="hist-title">Resumo</div>
+    </div>
+
+    <!-- Filtro período -->
+    <div style="margin:14px 16px 0">
+      <div class="cfg-section-title" style="margin-bottom:10px">Período</div>
+      <div class="toggle-group" id="periodoOpts" style="margin-bottom:10px"></div>
+      <div id="periodoCustom" style="display:none;gap:8px;margin-top:8px">
+        <div style="display:flex;gap:8px">
+          <div class="field" style="flex:1;margin-bottom:0">
+            <label>De</label>
+            <input type="date" id="filtroDataDe" oninput="renderResumo()">
+          </div>
+          <div class="field" style="flex:1;margin-bottom:0">
+            <label>Até</label>
+            <input type="date" id="filtroDataAte" oninput="renderResumo()">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtro atividade -->
+    <div style="margin:14px 16px 0">
+      <div class="cfg-section-title" style="margin-bottom:10px">Atividade</div>
+      <div class="hist-filters" id="histFilters"></div>
+    </div>
+
+    <!-- Totais -->
+    <div class="hist-totais" id="histTotais"></div>
+
+    <!-- Export -->
+    <button class="hist-export-btn" onclick="exportCSV()">⬇️ Exportar CSV</button>
+
+    <!-- Lista -->
+    <div class="hist-list" id="histList"></div>
+  </div>
+
+  <!-- ══ ATIVIDADES ══ -->
+  <div class="screen" id="screen-ativ">
+    <div class="ativ-header">
+      <div class="ativ-title">Atividades</div>
+      <div class="ativ-sub">Configure seus tipos de treino</div>
+    </div>
+    <div class="ativ-list" id="ativList"></div>
+  </div>
+
+  <!-- ══ CONFIGURAÇÕES ══ -->
+  <div class="screen" id="screen-cfg">
+    <div class="cfg-header">
+      <div class="cfg-title">Configurações</div>
+    </div>
+    <div class="cfg-section">
+      <div class="cfg-section-title">Tema de cores</div>
+      <div class="theme-grid" id="themeGrid"></div>
+    </div>
+  </div>
+
+  <!-- ══ BOTTOM NAV ══ -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" onclick="goScreen('home',this)">
+      <span class="nav-icon">🏠</span>Início
+    </button>
+    <button class="nav-btn" onclick="goScreen('hist',this)">
+      <span class="nav-icon">📊</span>Resumo
+    </button>
+    <button class="nav-btn" onclick="goScreen('ativ',this)">
+      <span class="nav-icon">⚡</span>Atividades
+    </button>
+    <button class="nav-btn" onclick="goScreen('cfg',this)">
+      <span class="nav-icon">⚙️</span>Config
+    </button>
+  </nav>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fabBtn" title="Registrar atividade">＋</button>
+
+<!-- ══ MODAL REGISTRAR ══ -->
+<div class="modal-overlay" id="modalRegistro">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalRegistroTitle">Registrar atividade</div>
+
+    <div class="field">
+      <label>Data</label>
+      <input type="date" id="regData">
+    </div>
+
+    <div class="field">
+      <label>Atividade</label>
+      <div class="toggle-group" id="regAtivOpts"></div>
+    </div>
+
+    <div id="regMetricas"></div>
+
+    <button class="btn-primary" onclick="salvarRegistro()">Salvar</button>
+    <button class="btn-secondary" onclick="fecharModal('modalRegistro')">Cancelar</button>
+  </div>
+</div>
+
+<!-- ══ MODAL VER DIA ══ -->
+<div class="modal-overlay" id="modalDia">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalDiaTitle">Atividades do dia</div>
+    <div id="modalDiaList"></div>
+    <button class="btn-primary" onclick="abrirRegistroDesdeModal()" style="margin-top:16px">＋ Adicionar atividade</button>
+    <button class="btn-secondary" onclick="fecharModal('modalDia')">Fechar</button>
+  </div>
+</div>
+
+<!-- ══ MODAL NOVA ATIVIDADE ══ -->
+<div class="modal-overlay" id="modalAtiv">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalAtivTitle">Nova atividade</div>
+
+    <div class="field">
+      <label>Nome</label>
+      <input type="text" id="ativNome" placeholder="Ex: Corrida, Yoga, Academia…">
+    </div>
+
+    <div class="field">
+      <label>Ícone</label>
+      <div class="emoji-grid" id="ativEmojiGrid"></div>
+    </div>
+
+    <div class="field">
+      <label>Cor</label>
+      <div class="color-grid" id="ativColorGrid"></div>
+    </div>
+
+    <div class="field">
+      <label>Métricas disponíveis</label>
+      <div class="toggle-group" id="ativMetricasOpts"></div>
+    </div>
+
+    <div class="field" id="ativTiposField">
+      <label>Tipos / Modalidades (opcional)</label>
+      <div class="tags-wrap" id="ativTiposWrap"></div>
+      <div class="tag-add-wrap">
+        <input type="text" id="ativTipoInput" placeholder="Ex: Rua, Esteira, Prova…">
+        <button class="tag-add-btn" onclick="addTipo()">+ Add</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Meta de treinos</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="number" id="ativMetaQtd" placeholder="Ex: 250" min="1" style="flex:1">
+        <div class="select-wrap" style="flex:1">
+          <select id="ativMetaTipo">
+            <option value="">Sem meta</option>
+            <option value="anual">por ano</option>
+            <option value="mensal">por mês</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="salvarAtividade()">Salvar atividade</button>
+    <button class="btn-secondary" onclick="fecharModal('modalAtiv')">Cancelar</button>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────
+let atividades = JSON.parse(localStorage.getItem('mt_atividades') || '[]');
+let registros  = JSON.parse(localStorage.getItem('mt_registros')  || '[]');
+let tema       = localStorage.getItem('mt_tema') || 'roxo';
+
+// ── CONFIG ───────────────────────────────────────────
+const TEMAS = [
+  { id: 'roxo',    cor: '#8b5cf6', label: 'Roxo'    },
+  { id: 'azul',    cor: '#3b82f6', label: 'Azul'    },
+  { id: 'verde',   cor: '#10b981', label: 'Verde'   },
+  { id: 'laranja', cor: '#f97316', label: 'Laranja' },
+  { id: 'rosa',    cor: '#ec4899', label: 'Rosa'    },
+];
+
+const EMOJIS = ['🏃','🏋️','🤸','🚴','🏊','⚽','🎾','🧘','🏄','🥊',
+                '🏐','🤾','🚵','🧗','⛹️','🎯','🏇','🤼','🥋','🎿',
+                '🏌️','🤺','🏂','🪂','🎱'];
+
+const CORES_ATIV = [
+  '#ef4444','#f97316','#f59e0b','#eab308','#84cc16',
+  '#22c55e','#10b981','#14b8a6','#06b6d4','#3b82f6',
+  '#6366f1','#8b5cf6','#a855f7','#ec4899','#f43f5e',
+  '#64748b','#78716c','#0ea5e9','#d946ef','#fb923c',
+];
+
+const METRICAS_LABELS = {
+  duracao:    '⏱ Duração',
+  distancia:  '📏 Distância',
+  intensidade:'🔥 Intensidade',
+  tipo:       '📍 Tipo/Local',
+  humor:      '😊 Humor',
+  nota:       '📝 Nota',
+};
+
+const HUMOR_OPTS = ['😞','😐','🙂','😄','🤩'];
+
+// ── STATE TEMPORÁRIO ─────────────────────────────────
+let _ativEdit    = null;
+let _regEdit     = null;
+let _calDate     = new Date();
+let _diaModal    = null;
+let _ativEmoji   = EMOJIS[0];
+let _ativCor     = CORES_ATIV[5];
+let _ativMetricas= [];
+let _ativTipos   = [];
+let _histFilter  = 'all';
+let _periodoSel  = 'mes';   // hoje | semana | mes | ano | custom
+let _filtroDataDe  = '';
+let _filtroDataAte = '';
+let _regAtivSel  = null;
+let _regMetricas = {};
+
+// ── INIT ─────────────────────────────────────────────
+function init() {
+  aplicarTema(tema);
+  renderThemeGrid();
+  renderGreeting();
+  renderCalendario();
+  renderToday();
+  renderAtividades();
+  // resumo carregado ao entrar na aba
+
+  // data padrão
+  document.getElementById('regData').value = hoje();
+}
+
+function hoje() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const dd = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${dd}`;
+}
+
+function fmtData(str) {
+  if (!str) return '';
+  const [y,m,d] = str.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+// ── TEMA ─────────────────────────────────────────────
+function aplicarTema(t) {
+  tema = t;
+  document.documentElement.setAttribute('data-theme', t === 'roxo' ? '' : t);
+  localStorage.setItem('mt_tema', t);
+  renderThemeGrid();
+}
+
+function renderThemeGrid() {
+  const grid = document.getElementById('themeGrid');
+  if (!grid) return;
+  grid.innerHTML = TEMAS.map(t => `
+    <button class="theme-btn${tema===t.id?' active':''}"
+      style="background:${t.cor}"
+      onclick="aplicarTema('${t.id}')"
+      title="${t.label}">
+      ${tema===t.id?'<span style="color:#fff;font-weight:700;">✓</span>':''}
+    </button>`).join('');
+}
+
+// ── GREETING ────────────────────────────────────────
+function renderGreeting() {
+  const h = new Date().getHours();
+  const g = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+  document.getElementById('greeting').textContent = g;
+
+  // Streak
+  const streak = calcStreak();
+  document.getElementById('streakNum').textContent = streak;
+  document.getElementById('streakSub').textContent =
+    streak === 0 ? 'Registre sua primeira atividade!' :
+    streak === 1 ? 'Começando a sequência 💪' :
+    `Não pare agora! 💪`;
+}
+
+function calcStreak() {
+  if (!registros.length) return 0;
+  const dias = [...new Set(registros.map(r => r.data))].sort().reverse();
+  let streak = 0;
+  let d = new Date(); d.setHours(0,0,0,0);
+  for (const dia of dias) {
+    const dd = new Date(dia + 'T00:00:00');
+    const diff = Math.round((d - dd) / 86400000);
+    if (diff === streak) streak++;
+    else if (diff > streak + 1) break;
+  }
+  return streak;
+}
+
+// ── NAVEGAÇÃO ────────────────────────────────────────
+function goScreen(id, btn) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  if (btn) btn.classList.add('active');
+
+  // FAB só na home e atividades
+  document.querySelector('.fab').style.display =
+    (id === 'home' || id === 'hist' || id === 'ativ') ? 'flex' : 'none';
+
+  if (id === 'hist')  renderResumo();
+  if (id === 'ativ')  renderAtividades();
+  if (id === 'home')  { renderCalendario(); renderToday(); }
+}
+
+// ── CALENDÁRIO ──────────────────────────────────────
+function navCal(dir) {
+  _calDate = new Date(_calDate.getFullYear(), _calDate.getMonth() + dir, 1);
+  renderCalendario();
+}
+
+function renderCalendario() {
+  const ano = _calDate.getFullYear();
+  const mes = _calDate.getMonth();
+
+  const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+                 'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  document.getElementById('calMonth').textContent = `${meses[mes]} ${ano}`;
+
+  const primeiro = new Date(ano, mes, 1).getDay();
+  const ultDia   = new Date(ano, mes+1, 0).getDate();
+  const hoje_str = hoje();
+
+  // Agrupa registros por dia
+  const porDia = {};
+  registros.forEach(r => {
+    if (!porDia[r.data]) porDia[r.data] = [];
+    porDia[r.data].push(r);
+  });
+
+  let html = '';
+
+  // Dias do mês anterior
+  const diasAnt = new Date(ano, mes, 0).getDate();
+  for (let i = primeiro - 1; i >= 0; i--) {
+    html += `<div class="cal-day other-month empty"><span class="cal-day-num">${diasAnt-i}</span></div>`;
+  }
+
+  for (let d = 1; d <= ultDia; d++) {
+    const dStr = `${ano}-${String(mes+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isHoje = dStr === hoje_str;
+    const regs = porDia[dStr] || [];
+    const hasAtiv = regs.length > 0;
+
+    // Pega cores únicas das atividades do dia
+    const cores = [...new Set(regs.map(r => {
+      const a = atividades.find(a => a.id === r.atividadeId);
+      return a ? a.cor : '#999';
+    }))].slice(0, 4);
+
+    const dotsHtml = cores.map(c =>
+      `<div class="cal-dot" style="background:${c}"></div>`).join('');
+
+    html += `<div class="cal-day${isHoje?' today':''}${hasAtiv?' has-activity':''}"
+      onclick="clicouDia('${dStr}')">
+      <span class="cal-day-num">${d}</span>
+      ${dotsHtml ? `<div class="cal-dots">${dotsHtml}</div>` : ''}
+    </div>`;
+  }
+
+  document.getElementById('calDays').innerHTML = html;
+}
+
+function clicouDia(dStr) {
+  const regs = registros.filter(r => r.data === dStr);
+  if (regs.length > 0) {
+    _diaModal = dStr;
+    renderModalDia(dStr, regs);
+    abrirModal('modalDia');
+  } else {
+    // Abre modal de registro com a data preenchida
+    abrirModalRegistro(dStr);
+  }
+}
+
+function renderModalDia(dStr, regs) {
+  document.getElementById('modalDiaTitle').textContent = `📅 ${fmtData(dStr)}`;
+  const list = document.getElementById('modalDiaList');
+  list.innerHTML = regs.map(r => {
+    const a = atividades.find(a => a.id === r.atividadeId);
+    if (!a) return '';
+    return `
+      <div class="registro-card" style="margin-bottom:8px">
+        <div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
+        <div class="registro-body">
+          <div class="registro-nome">${a.nome}</div>
+          <div class="registro-meta">${buildMeta(r, a)}</div>
+        </div>
+        <div class="registro-actions">
+          <button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
+          <button class="registro-action-btn del" onclick="deletarRegistro('${r.id}')">🗑</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function abrirRegistroDesdeModal() {
+  fecharModal('modalDia');
+  abrirModalRegistro(_diaModal);
+}
+
+// ── TODAY ────────────────────────────────────────────
+function renderToday() {
+  const h = hoje();
+  const regs = registros.filter(r => r.data === h);
+  const label = document.getElementById('todayLabel');
+  const list  = document.getElementById('todayList');
+
+  label.textContent = `Hoje · ${fmtData(h)}`;
+
+  if (!regs.length) {
+    list.innerHTML = `
+      <div class="today-empty">
+        <div class="today-empty-icon">🎯</div>
+        <div class="today-empty-text">Nenhuma atividade registrada hoje</div>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = regs.map(r => {
+    const a = atividades.find(a => a.id === r.atividadeId);
+    if (!a) return '';
+    return `
+      <div class="registro-card">
+        <div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
+        <div class="registro-body">
+          <div class="registro-nome">${a.nome}</div>
+          <div class="registro-meta">${buildMeta(r, a)}</div>
+        </div>
+        <div class="registro-actions">
+          <button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
+          <button class="registro-action-btn del" onclick="deletarRegistro('${r.id}')">🗑</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function buildMeta(r, a) {
+  const parts = [];
+  if (r.tipo)       parts.push(`📍 ${r.tipo}`);
+  if (r.duracao)    parts.push(`⏱ ${r.duracao}min`);
+  if (r.distancia)  parts.push(`📏 ${r.distancia}km`);
+  if (r.intensidade)parts.push(`🔥 ${r.intensidade}`);
+  if (r.humor)      parts.push(r.humor);
+  if (r.nota)       parts.push(`"${r.nota}"`);
+  return parts.join(' · ') || 'Registrado';
+}
+
+// ── MODAL REGISTRAR ──────────────────────────────────
+function abrirModalRegistro(dStr) {
+  _regEdit = null;
+  _regAtivSel = null;
+  _regMetricas = {};
+
+  document.getElementById('modalRegistroTitle').textContent = 'Registrar atividade';
+  document.getElementById('regData').value = dStr || hoje();
+
+  renderRegAtivOpts();
+  document.getElementById('regMetricas').innerHTML = '';
+
+  abrirModal('modalRegistro');
+}
+
+function editarRegistro(id) {
+  fecharModal('modalDia');
+  const r = registros.find(r => r.id === id);
+  if (!r) return;
+  _regEdit = id;
+  _regAtivSel = r.atividadeId;
+  _regMetricas = { ...r };
+
+  document.getElementById('modalRegistroTitle').textContent = 'Editar registro';
+  document.getElementById('regData').value = r.data;
+
+  renderRegAtivOpts();
+  renderRegMetricas();
+  abrirModal('modalRegistro');
+}
+
+function renderRegAtivOpts() {
+  const wrap = document.getElementById('regAtivOpts');
+  if (!atividades.length) {
+    wrap.innerHTML = `<div style="color:var(--text2);font-size:13px">Crie atividades primeiro na aba ⚡</div>`;
+    return;
+  }
+  wrap.innerHTML = atividades.map(a => `
+    <div class="toggle-opt${_regAtivSel===a.id?' selected':''}"
+      style="${_regAtivSel===a.id?`background:${a.cor}20;border-color:${a.cor};color:${a.cor}`:''}"
+      onclick="selecionarAtivReg('${a.id}')">
+      ${a.emoji} ${a.nome}
+    </div>`).join('');
+}
+
+function selecionarAtivReg(id) {
+  _regAtivSel = id;
+  _regMetricas = {};
+  renderRegAtivOpts();
+  renderRegMetricas();
+}
+
+function renderRegMetricas() {
+  const wrap = document.getElementById('regMetricas');
+  const a = atividades.find(a => a.id === _regAtivSel);
+  if (!a) { wrap.innerHTML = ''; return; }
+
+  let html = '<div class="divider"></div>';
+
+  if (a.tipos?.length && a.metricas.includes('tipo')) {
+    html += `<div class="field"><label>Tipo / Local</label>
+      <div class="select-wrap">
+        <select id="rm_tipo" onchange="_regMetricas.tipo=this.value">
+          <option value="">Selecione…</option>
+          ${a.tipos.map(t=>`<option value="${t}"${_regMetricas.tipo===t?' selected':''}>${t}</option>`).join('')}
+        </select>
+      </div></div>`;
+  }
+
+  if (a.metricas.includes('duracao')) {
+    html += `<div class="field"><label>Duração (minutos)</label>
+      <input type="number" id="rm_duracao" placeholder="Ex: 45" min="1"
+        value="${_regMetricas.duracao||''}"
+        oninput="_regMetricas.duracao=this.value">
+    </div>`;
+  }
+
+  if (a.metricas.includes('distancia')) {
+    html += `<div class="field"><label>Distância (km)</label>
+      <input type="number" id="rm_distancia" placeholder="Ex: 5.2" min="0" step="0.1"
+        value="${_regMetricas.distancia||''}"
+        oninput="_regMetricas.distancia=this.value">
+    </div>`;
+  }
+
+  if (a.metricas.includes('intensidade')) {
+    const sel = _regMetricas.intensidade || '';
+    html += `<div class="field"><label>Intensidade</label>
+      <div class="intensidade-opts">
+        <button class="intens-btn leve${sel==='Leve'?' selected':''}" onclick="selIntens('Leve')">😌 Leve</button>
+        <button class="intens-btn medio${sel==='Moderado'?' selected':''}" onclick="selIntens('Moderado')">💪 Moderado</button>
+        <button class="intens-btn intenso${sel==='Intenso'?' selected':''}" onclick="selIntens('Intenso')">🔥 Intenso</button>
+      </div></div>`;
+  }
+
+  if (a.metricas.includes('humor')) {
+    const sel = _regMetricas.humor || '';
+    html += `<div class="field"><label>Como você se sentiu?</label>
+      <div class="humor-opts">
+        ${HUMOR_OPTS.map(h=>`
+          <button class="humor-btn${sel===h?' selected':''}" onclick="selHumor('${h}')">${h}</button>
+        `).join('')}
+      </div></div>`;
+  }
+
+  if (a.metricas.includes('nota')) {
+    html += `<div class="field"><label>Observações</label>
+      <textarea id="rm_nota" placeholder="Como foi o treino?"
+        oninput="_regMetricas.nota=this.value">${_regMetricas.nota||''}</textarea>
+    </div>`;
+  }
+
+  wrap.innerHTML = html;
+}
+
+function selIntens(v) {
+  _regMetricas.intensidade = v;
+  renderRegMetricas();
+}
+function selHumor(v) {
+  _regMetricas.humor = v;
+  renderRegMetricas();
+}
+
+function salvarRegistro() {
+  if (!_regAtivSel) { alert('Selecione uma atividade.'); return; }
+  const data = document.getElementById('regData').value;
+  if (!data) { alert('Selecione uma data.'); return; }
+
+  const reg = {
+    id:          _regEdit || Date.now().toString(),
+    atividadeId: _regAtivSel,
+    data,
+    ..._regMetricas,
+  };
+
+  if (_regEdit) {
+    registros = registros.map(r => r.id === _regEdit ? reg : r);
+  } else {
+    registros.unshift(reg);
+  }
+
+  salvarDados();
+  fecharModal('modalRegistro');
+  renderToday();
+  renderCalendario();
+  renderGreeting();
+}
+
+function deletarRegistro(id) {
+  if (!confirm('Deletar este registro?')) return;
+  registros = registros.filter(r => r.id !== id);
+  salvarDados();
+  fecharModal('modalDia');
+  renderToday();
+  renderCalendario();
+  renderGreeting();
+}
+
+// ── MODAL NOVA ATIVIDADE ─────────────────────────────
+function abrirModalAtividade(id) {
+  _ativEdit = id || null;
+
+  if (id) {
+    const a = atividades.find(a => a.id === id);
+    document.getElementById('ativNome').value = a.nome;
+    _ativEmoji    = a.emoji;
+    _ativCor      = a.cor;
+    _ativMetricas = [...a.metricas];
+    _ativTipos    = [...(a.tipos||[])];
+    document.getElementById('modalAtivTitle').textContent = 'Editar atividade';
+    // Metas
+    setTimeout(() => {
+      document.getElementById('ativMetaQtd').value  = a.metaQtd  || '';
+      document.getElementById('ativMetaTipo').value = a.metaTipo || '';
+    }, 50);
+  } else {
+    document.getElementById('ativNome').value = '';
+    _ativEmoji    = EMOJIS[0];
+    _ativCor      = CORES_ATIV[5];
+    _ativMetricas = ['duracao','intensidade'];
+    _ativTipos    = [];
+    document.getElementById('modalAtivTitle').textContent = 'Nova atividade';
+    setTimeout(() => {
+      document.getElementById('ativMetaQtd').value  = '';
+      document.getElementById('ativMetaTipo').value = '';
+    }, 50);
+  }
+
+  renderEmojiGrid();
+  renderColorGrid();
+  renderMetricasOpts();
+  renderTiposTags();
+  abrirModal('modalAtiv');
+}
+
+function renderEmojiGrid() {
+  document.getElementById('ativEmojiGrid').innerHTML = EMOJIS.map(e => `
+    <div class="emoji-opt${_ativEmoji===e?' selected':''}" onclick="selEmoji('${e}')">${e}</div>
+  `).join('');
+}
+function selEmoji(e) { _ativEmoji = e; renderEmojiGrid(); }
+
+function renderColorGrid() {
+  document.getElementById('ativColorGrid').innerHTML = CORES_ATIV.map(c => `
+    <div class="color-opt${_ativCor===c?' selected':''}"
+      style="background:${c}" onclick="selCor('${c}')"></div>
+  `).join('');
+}
+function selCor(c) { _ativCor = c; renderColorGrid(); }
+
+function renderMetricasOpts() {
+  document.getElementById('ativMetricasOpts').innerHTML =
+    Object.entries(METRICAS_LABELS).map(([k,v]) => `
+      <div class="toggle-opt${_ativMetricas.includes(k)?' selected':''}"
+        onclick="toggleMetrica('${k}')">${v}</div>
+    `).join('');
+}
+function toggleMetrica(k) {
+  _ativMetricas = _ativMetricas.includes(k)
+    ? _ativMetricas.filter(m => m !== k)
+    : [..._ativMetricas, k];
+  renderMetricasOpts();
+}
+
+function renderTiposTags() {
+  document.getElementById('ativTiposWrap').innerHTML = _ativTipos.map(t => `
+    <div class="tag-item">${t}
+      <button class="tag-remove" onclick="removeTipo('${t}')">×</button>
+    </div>`).join('');
+}
+function addTipo() {
+  const inp = document.getElementById('ativTipoInput');
+  const v = inp.value.trim();
+  if (v && !_ativTipos.includes(v)) { _ativTipos.push(v); renderTiposTags(); }
+  inp.value = '';
+}
+function removeTipo(t) { _ativTipos = _ativTipos.filter(x => x !== t); renderTiposTags(); }
+
+document.getElementById('ativTipoInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); addTipo(); }
+});
+
+function salvarAtividade() {
+  const nome = document.getElementById('ativNome').value.trim();
+  if (!nome) { alert('Digite o nome da atividade.'); return; }
+
+  const metaQtd  = parseInt(document.getElementById('ativMetaQtd').value) || 0;
+  const metaTipo = document.getElementById('ativMetaTipo').value;
+  const ativ = {
+    id:       _ativEdit || Date.now().toString(),
+    nome, emoji: _ativEmoji, cor: _ativCor,
+    metricas: _ativMetricas,
+    tipos:    _ativTipos,
+    metaQtd,
+    metaTipo,
+  };
+
+  if (_ativEdit) {
+    atividades = atividades.map(a => a.id === _ativEdit ? ativ : a);
+  } else {
+    atividades.push(ativ);
+  }
+
+  salvarDados();
+  fecharModal('modalAtiv');
+  renderAtividades();
+}
+
+function deletarAtividade(id) {
+  if (!confirm('Deletar esta atividade?')) return;
+  atividades = atividades.filter(a => a.id !== id);
+  salvarDados();
+  renderAtividades();
+}
+
+// ── PROGRESSO DE METAS ───────────────────────────────
+function buildProgresso(a) {
+  if (!a.metaQtd || !a.metaTipo) return '';
+
+  const agora = new Date();
+  let regsAtiv;
+  if (a.metaTipo === 'anual') {
+    const ano = agora.getFullYear();
+    regsAtiv = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(ano));
+  } else {
+    const ano = agora.getFullYear();
+    const mes = String(agora.getMonth()+1).padStart(2,'0');
+    regsAtiv = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(`${ano}-${mes}`));
+  }
+
+  const feitos = regsAtiv.length;
+  const pct    = Math.min(100, Math.round((feitos / a.metaQtd) * 100));
+  const label  = a.metaTipo === 'anual' ? 'este ano' : 'este mês';
+
+  return `
+    <div style="margin-top:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:11px;color:var(--text2);font-weight:500">${feitos}/${a.metaQtd} ${label}</span>
+        <span style="font-size:11px;font-weight:700;color:${a.cor}">${pct}%</span>
+      </div>
+      <div style="height:5px;background:var(--surface3);border-radius:99px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${a.cor};border-radius:99px;transition:width 0.4s"></div>
+      </div>
+    </div>`;
+}
+
+// ── RENDER ATIVIDADES ────────────────────────────────
+function renderAtividades() {
+  const list = document.getElementById('ativList');
+  if (!atividades.length) {
+    list.innerHTML = `
+      <div class="ativ-empty">
+        <div class="ativ-empty-icon">⚡</div>
+        <div class="ativ-empty-text">Nenhuma atividade criada ainda</div>
+        <div class="ativ-empty-sub">Toque no + para criar sua primeira</div>
+      </div>`;
+
+    // FAB na tela de atividades abre modal de atividade
+    return;
+  }
+
+  list.innerHTML = atividades.map(a => {
+    const progressoHtml = buildProgresso(a);
+    return `
+    <div class="ativ-card">
+      <div class="ativ-icon-wrap" style="background:${a.cor}20">${a.emoji}</div>
+      <div class="ativ-body">
+        <div class="ativ-nome">${a.nome}</div>
+        <div class="ativ-metricas">${a.metricas.map(m=>METRICAS_LABELS[m]).join(' · ')}</div>
+        ${progressoHtml}
+      </div>
+      <div class="ativ-actions">
+        <button class="ativ-action-btn" onclick="abrirModalAtividade('${a.id}')">✏️</button>
+        <button class="ativ-action-btn del" onclick="deletarAtividade('${a.id}')">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// FAB comportamento por tela
+document.getElementById('fabBtn').addEventListener('click', () => {
+  const ativScreen = document.getElementById('screen-ativ');
+  if (ativScreen.classList.contains('active')) {
+    abrirModalAtividade(null);
+  } else {
+    abrirModalRegistro(null);
+  }
+});
+
+// ── RESUMO ───────────────────────────────────────────
+const PERIODOS = [
+  { id: 'hoje',   label: 'Hoje'       },
+  { id: 'semana', label: '7 dias'     },
+  { id: 'mes',    label: 'Este mês'   },
+  { id: 'ano',    label: 'Este ano'   },
+  { id: 'custom', label: 'Período...' },
+];
+
+function setPeriodo(p) {
+  _periodoSel = p;
+  const customEl = document.getElementById('periodoCustom');
+  if (customEl) customEl.style.display = p === 'custom' ? 'block' : 'none';
+  renderResumo();
+}
+
+function setHistFilter(f) {
+  _histFilter = f;
+  renderResumo();
+}
+
+function getFiltroRange() {
+  const agora = new Date();
+  const hj = hoje();
+  if (_periodoSel === 'hoje')   return { de: hj, ate: hj };
+  if (_periodoSel === 'semana') {
+    const d = new Date(); d.setDate(d.getDate() - 6);
+    return { de: fmtISO(d), ate: hj };
+  }
+  if (_periodoSel === 'mes') {
+    const y = agora.getFullYear(), m = String(agora.getMonth()+1).padStart(2,'0');
+    return { de: `${y}-${m}-01`, ate: hj };
+  }
+  if (_periodoSel === 'ano') {
+    return { de: `${agora.getFullYear()}-01-01`, ate: hj };
+  }
+  if (_periodoSel === 'custom') {
+    const de  = document.getElementById('filtroDataDe')?.value  || '';
+    const ate = document.getElementById('filtroDataAte')?.value || hj;
+    return { de, ate };
+  }
+  return { de: '', ate: hj };
+}
+
+function fmtISO(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function renderResumo() {
+  // Chips de período
+  const periodoEl = document.getElementById('periodoOpts');
+  if (periodoEl) {
+    periodoEl.innerHTML = PERIODOS.map(p => `
+      <div class="toggle-opt${_periodoSel===p.id?' selected':''}"
+        onclick="setPeriodo('${p.id}')">${p.label}</div>`).join('');
+  }
+  const customEl = document.getElementById('periodoCustom');
+  if (customEl) customEl.style.display = _periodoSel === 'custom' ? 'block' : 'none';
+
+  // Chips de atividade
+  const filtersEl = document.getElementById('histFilters');
+  if (filtersEl) {
+    const chips = [`<div class="filter-chip${_histFilter==='all'?' active':''}"
+      onclick="setHistFilter('all')">Todas</div>`];
+    atividades.forEach(a => {
+      chips.push(`<div class="filter-chip${_histFilter===a.id?' active':''}"
+        onclick="setHistFilter('${a.id}')">${a.emoji} ${a.nome}</div>`);
+    });
+    filtersEl.innerHTML = chips.join('');
+  }
+
+  // Aplica filtros
+  const { de, ate } = getFiltroRange();
+  const filtered = registros.filter(r => {
+    const dentroData = (!de || r.data >= de) && (!ate || r.data <= ate);
+    const dentroAtiv = _histFilter === 'all' || r.atividadeId === _histFilter;
+    return dentroData && dentroAtiv;
+  });
+
+  // Totais
+  const totaisEl = document.getElementById('histTotais');
+  const totalRegs = filtered.length;
+  const totalMin  = filtered.reduce((s,r) => s + (parseFloat(r.duracao)||0), 0);
+  const totalKm   = filtered.reduce((s,r) => s + (parseFloat(r.distancia)||0), 0);
+  const totalDias = new Set(filtered.map(r => r.data)).size;
+
+  let totHtml = `
+    <div class="total-chip"><div class="total-chip-val">${totalRegs}</div><div class="total-chip-label">atividades</div></div>
+    <div class="total-chip"><div class="total-chip-val">${totalDias}</div><div class="total-chip-label">dias ativos</div></div>`;
+  if (totalMin) totHtml += `<div class="total-chip"><div class="total-chip-val">${totalMin}min</div><div class="total-chip-label">de duração</div></div>`;
+  if (totalKm)  totHtml += `<div class="total-chip"><div class="total-chip-val">${totalKm.toFixed(1)}km</div><div class="total-chip-label">percorridos</div></div>`;
+  if (totaisEl) totaisEl.innerHTML = totHtml;
+
+  // Lista
+  const listEl = document.getElementById('histList');
+  if (!listEl) return;
+
+  if (!filtered.length) {
+    listEl.innerHTML = `<div class="hist-empty"><div class="hist-empty-icon">📊</div>Nenhum registro neste período</div>`;
+    return;
+  }
+
+  const porData = {};
+  filtered.forEach(r => {
+    if (!porData[r.data]) porData[r.data] = [];
+    porData[r.data].push(r);
+  });
+
+  listEl.innerHTML = Object.entries(porData)
+    .sort((a,b) => b[0].localeCompare(a[0]))
+    .map(([data, regs]) => `
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:4px 2px;margin-top:4px">${fmtData(data)}</div>
+      ${regs.map(r => {
+        const a = atividades.find(a => a.id === r.atividadeId);
+        if (!a) return '';
+        return `<div class="registro-card">
+          <div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
+          <div class="registro-body">
+            <div class="registro-nome">${a.nome}</div>
+            <div class="registro-meta">${buildMeta(r, a)}</div>
+          </div>
+          <div class="registro-actions">
+            <button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
+            <button class="registro-action-btn del" onclick="deletarRegistroHist('${r.id}')">🗑</button>
+          </div>
+        </div>`;
+      }).join('')}`).join('');
+}
+
+function deletarRegistroHist(id) {
+  if (!confirm('Deletar este registro?')) return;
+  registros = registros.filter(r => r.id !== id);
+  salvarDados();
+  renderResumo();
+  renderCalendario();
+  renderGreeting();
+}
+
+
+// ── EXPORT CSV ───────────────────────────────────────
+function exportCSV() {
+  const { de, ate } = getFiltroRange();
+  const paraExportar = registros.filter(r => {
+    const dentroData = (!de || r.data >= de) && (!ate || r.data <= ate);
+    const dentroAtiv = _histFilter === 'all' || r.atividadeId === _histFilter;
+    return dentroData && dentroAtiv;
+  });
+  if (!paraExportar.length) { alert('Nenhum registro para exportar.'); return; }
+  const header = ['Data','Atividade','Tipo','Duração (min)','Distância (km)','Intensidade','Humor','Nota'];
+  const rows = paraExportar.map(r => {
+    const a = atividades.find(a => a.id === r.atividadeId);
+    return [
+      fmtData(r.data),
+      a?.nome || '',
+      r.tipo || '',
+      r.duracao || '',
+      r.distancia || '',
+      r.intensidade || '',
+      r.humor || '',
+      r.nota ? `"${r.nota.replace(/"/g,'""')}"` : '',
+    ].join(',');
+  });
+  const csv = [header.join(','), ...rows].join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `atividades-${de||'tudo'}-${ate}.csv`; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── MODAIS ───────────────────────────────────────────
+function abrirModal(id) {
+  document.getElementById(id).classList.add('open');
+}
+function fecharModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// Fecha modal clicando no overlay
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+// ── PERSISTÊNCIA ────────────────────────────────────
+function salvarDados() {
+  localStorage.setItem('mt_atividades', JSON.stringify(atividades));
+  localStorage.setItem('mt_registros',  JSON.stringify(registros));
+}
+
+// ── START ─────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
