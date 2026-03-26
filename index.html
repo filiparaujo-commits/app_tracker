@@ -6,6 +6,150 @@
 <title>Meu Treino</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+
+/* ── LOGIN SCREEN ── */
+#loginScreen {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 999; padding: 40px 32px;
+  text-align: center;
+}
+
+.login-blob {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+}
+.login-blob::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+  top: -60px; left: -60px; border-radius: 50%;
+}
+.login-blob::after {
+  content: '';
+  position: absolute;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+  bottom: 40px; right: -40px; border-radius: 50%;
+}
+
+.login-content { position: relative; z-index: 1; }
+
+.login-app-icon {
+  width: 80px; height: 80px;
+  background: var(--accent);
+  border-radius: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 38px;
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.login-app-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px; font-weight: 800;
+  color: var(--text); line-height: 1.1;
+  margin-bottom: 8px;
+}
+.login-app-name span { color: var(--accent); }
+
+.login-tagline {
+  font-size: 15px; color: var(--text2);
+  line-height: 1.5; margin-bottom: 40px;
+  font-weight: 400;
+}
+
+.login-features {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 40px; text-align: left;
+}
+.login-feature {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 12px 16px;
+}
+.login-feature-icon {
+  width: 36px; height: 36px;
+  background: var(--accent-dim);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.login-feature-text { font-size: 13px; color: var(--text2); line-height: 1.4; }
+.login-feature-text strong { color: var(--text); font-weight: 600; display: block; }
+
+.btn-google-login {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+.btn-google-login:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+.btn-google-login svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+.login-disclaimer {
+  font-size: 11px; color: var(--text3);
+  margin-top: 16px; line-height: 1.5;
+}
+
+/* ── TOPBAR USUARIO ── */
+.user-topbar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px 0;
+}
+.user-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--border); object-fit: cover;
+}
+.user-avatar-ph {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--accent-dim); border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: var(--accent-text);
+}
+.user-display-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px; font-weight: 500; color: var(--text2); flex: 1;
+}
+.btn-logout {
+  background: none; border: 1px solid var(--border);
+  border-radius: 8px; padding: 5px 10px;
+  font-family: 'Outfit', sans-serif; font-size: 12px;
+  color: var(--text3); cursor: pointer; transition: all 0.15s;
+}
+.btn-logout:hover { border-color: var(--bad); color: var(--bad); }
+
+/* loading overlay */
+#loadingOverlay {
+  position: fixed; inset: 0; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 998; flex-direction: column; gap: 16px;
+}
+.loading-spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--accent-dim);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--text2); }
+
 /* ── TEMAS ── */
 :root {
   --accent:      #8b5cf6;
@@ -723,12 +867,154 @@ textarea { resize: none; min-height: 72px; }
 .streak-sub   { font-size: 11px; color: var(--text2); margin-top: 2px; }
 .streak-icon  { font-size: 28px; }
 </style>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+                              from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, doc, addDoc, getDocs, setDoc, deleteDoc, query, orderBy, writeBatch }
+                              from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey:            "AIzaSyADs9yN-WCgfZWpRjARd4JgmstAQQkMLSE",
+    authDomain:        "app-milhas-4440f.firebaseapp.com",
+    projectId:         "app-milhas-4440f",
+    storageBucket:     "app-milhas-4440f.firebasestorage.app",
+    messagingSenderId: "619852232899",
+    appId:             "1:619852232899:web:917e37be07ae65bd714a76"
+  };
+
+  const app      = initializeApp(firebaseConfig);
+  const auth     = getAuth(app);
+  const db       = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  // ── Refs ────────────────────────────────────────────
+  function ativRef(uid)  { return collection(db, "usuarios", uid, "tracker_atividades"); }
+  function regRef(uid)   { return collection(db, "usuarios", uid, "tracker_registros"); }
+
+  // ── Firestore ops ───────────────────────────────────
+  async function fsCarregarAtividades(uid) {
+    const snap = await getDocs(ativRef(uid));
+    return snap.docs.map(d => ({ ...d.data(), id: d.id }));
+  }
+  async function fsCarregarRegistros(uid) {
+    const q = query(regRef(uid), orderBy("timestamp", "desc"));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ ...d.data(), id: d.id }));
+  }
+  async function fsSalvarAtividade(uid, ativ) {
+    await setDoc(doc(db, "usuarios", uid, "tracker_atividades", ativ.id), ativ);
+  }
+  async function fsDeletarAtividade(uid, id) {
+    await deleteDoc(doc(db, "usuarios", uid, "tracker_atividades", id));
+  }
+  async function fsSalvarRegistro(uid, reg) {
+    await setDoc(doc(db, "usuarios", uid, "tracker_registros", reg.id), {
+      ...reg, timestamp: reg.data + 'T' + reg.id
+    });
+  }
+  async function fsDeletarRegistro(uid, id) {
+    await deleteDoc(doc(db, "usuarios", uid, "tracker_registros", id));
+  }
+  async function fsLimparTudo(uid) {
+    const [sa, sr] = await Promise.all([getDocs(ativRef(uid)), getDocs(regRef(uid))]);
+    const batch = writeBatch(db);
+    [...sa.docs, ...sr.docs].forEach(d => batch.delete(d.ref));
+    await batch.commit();
+  }
+
+  // ── Expõe globalmente ────────────────────────────────
+  window._fb = {
+    auth, provider, signInWithPopup, signOut,
+    currentUser: null,
+    fsCarregarAtividades, fsCarregarRegistros,
+    fsSalvarAtividade, fsDeletarAtividade,
+    fsSalvarRegistro, fsDeletarRegistro, fsLimparTudo,
+  };
+
+  // ── Auth state ───────────────────────────────────────
+  onAuthStateChanged(auth, async (user) => {
+    window._fb.currentUser = user;
+    if (user) {
+      // Carrega dados do Firestore
+      try {
+        const [ativs, regs] = await Promise.all([
+          fsCarregarAtividades(user.uid),
+          fsCarregarRegistros(user.uid),
+        ]);
+        window._appOnLogin(user, ativs, regs);
+      } catch(e) {
+        console.error('Erro ao carregar dados:', e);
+        window._appOnLogin(user, [], []);
+      }
+    } else {
+      window._appOnLogout();
+    }
+  });
+</script>
 </head>
 <body>
-<div id="app">
+
+<!-- ══ LOGIN ══ -->
+<div id="loginScreen">
+  <div class="login-blob"></div>
+  <div class="login-content">
+    <div class="login-app-icon">🏃</div>
+    <div class="login-app-name">Meu <span>Treino</span></div>
+    <div class="login-tagline">Registre suas atividades,<br>acompanhe sua evolução.</div>
+    <div class="login-features">
+      <div class="login-feature">
+        <div class="login-feature-icon">📅</div>
+        <div class="login-feature-text">
+          <strong>Calendário visual</strong>
+          Veja seus treinos do mês de relance
+        </div>
+      </div>
+      <div class="login-feature">
+        <div class="login-feature-icon">📊</div>
+        <div class="login-feature-text">
+          <strong>Resumo e metas</strong>
+          Acompanhe progresso e bata recordes
+        </div>
+      </div>
+      <div class="login-feature">
+        <div class="login-feature-icon">☁️</div>
+        <div class="login-feature-text">
+          <strong>Salvo na nuvem</strong>
+          Acesse de qualquer dispositivo
+        </div>
+      </div>
+    </div>
+    <button class="btn-google-login" onclick="fazerLogin()">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+      Entrar com Google
+    </button>
+    <div class="login-disclaimer">Seus dados ficam salvos em sua conta Google,<br>acessíveis só por você.</div>
+  </div>
+</div>
+
+<!-- ══ LOADING ══ -->
+<div id="loadingOverlay" style="display:none">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Carregando seus dados…</div>
+</div>
+
+<div id="app" style="display:none">
 
   <!-- ══ HOME ══ -->
   <div class="screen active" id="screen-home">
+    <div class="user-topbar">
+      <div id="userAvatarWrap"></div>
+      <span class="user-display-name" id="userDisplayName"></span>
+      <button class="btn-logout" onclick="fazerLogout()">Sair</button>
+    </div>
     <div class="home-header">
       <div class="home-greeting" id="greeting">Bom dia</div>
       <div class="home-title">Como foi seu <span>dia</span>?</div>
@@ -742,6 +1028,12 @@ textarea { resize: none; min-height: 72px; }
         <div class="streak-sub" id="streakSub">Registre sua primeira atividade!</div>
       </div>
       <div class="streak-icon">🔥</div>
+    </div>
+
+    <!-- Hoje -->
+    <div class="today-section">
+      <div class="section-title" id="todayLabel">Hoje</div>
+      <div id="todayList"></div>
     </div>
 
     <!-- Calendário -->
@@ -760,12 +1052,6 @@ textarea { resize: none; min-height: 72px; }
         <div class="cal-weekday">S</div>
       </div>
       <div class="cal-days" id="calDays"></div>
-    </div>
-
-    <!-- Hoje -->
-    <div class="today-section">
-      <div class="section-title" id="todayLabel">Hoje</div>
-      <div id="todayList"></div>
     </div>
   </div>
 
@@ -799,6 +1085,12 @@ textarea { resize: none; min-height: 72px; }
       <div class="hist-filters" id="histFilters"></div>
     </div>
 
+    <!-- Filtro modalidade (aparece só quando atividade selecionada) -->
+    <div id="modalidadeFiltroWrap" style="display:none;margin:14px 16px 0">
+      <div class="cfg-section-title" style="margin-bottom:10px">Modalidade</div>
+      <div class="hist-filters" id="modalidadeFiltroOpts"></div>
+    </div>
+
     <!-- Totais -->
     <div class="hist-totais" id="histTotais"></div>
 
@@ -816,6 +1108,29 @@ textarea { resize: none; min-height: 72px; }
       <div class="ativ-sub">Configure seus tipos de treino</div>
     </div>
     <div class="ativ-list" id="ativList"></div>
+  </div>
+
+  <!-- ══ DETALHE ATIVIDADE ══ -->
+  <div class="screen" id="screen-ativ-detail">
+    <div class="ativ-header" style="padding-bottom:0">
+      <button onclick="voltarAtividades()" style="background:none;border:none;color:var(--accent);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;padding:0;margin-bottom:12px">‹ Voltar</button>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div id="detailIcon" style="width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px"></div>
+        <div>
+          <div id="detailNome" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;color:var(--text)"></div>
+          <div id="detailMeta" style="font-size:12px;color:var(--text2);margin-top:2px"></div>
+        </div>
+        <button id="detailEditBtn" style="margin-left:auto;background:none;border:1.5px solid var(--border);border-radius:10px;padding:8px 12px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text2);cursor:pointer">✏️ Editar</button>
+      </div>
+      <!-- Totais rápidos -->
+      <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px" id="detailTotais"></div>
+      <!-- Período -->
+      <div style="display:flex;gap:8px;margin-top:14px;overflow-x:auto;scrollbar-width:none" id="detailPeriodoOpts"></div>
+      <!-- Barra de progresso meta -->
+      <div id="detailProgressoWrap" style="margin-top:14px"></div>
+    </div>
+    <!-- Lista de registros -->
+    <div style="margin:14px 16px 0" id="detailRegistrosList"></div>
   </div>
 
   <!-- ══ CONFIGURAÇÕES ══ -->
@@ -939,8 +1254,8 @@ textarea { resize: none; min-height: 72px; }
 
 <script>
 // ── DATA ──────────────────────────────────────────────
-let atividades = JSON.parse(localStorage.getItem('mt_atividades') || '[]');
-let registros  = JSON.parse(localStorage.getItem('mt_registros')  || '[]');
+let atividades = [];
+let registros  = [];
 let tema       = localStorage.getItem('mt_tema') || 'roxo';
 
 // ── CONFIG ───────────────────────────────────────────
@@ -952,9 +1267,12 @@ const TEMAS = [
   { id: 'rosa',    cor: '#ec4899', label: 'Rosa'    },
 ];
 
-const EMOJIS = ['🏃','🏋️','🤸','🚴','🏊','⚽','🎾','🧘','🏄','🥊',
-                '🏐','🤾','🚵','🧗','⛹️','🎯','🏇','🤼','🥋','🎿',
-                '🏌️','🤺','🏂','🪂','🎱'];
+const EMOJIS = [
+  '🏃','🏃‍♀️','🚶','🚶‍♀️','🧎','🏋️','🏋️‍♀️','🤸','🤸‍♀️','🚴',
+  '🚴‍♀️','🏊','🏊‍♀️','⚽','🎾','🏀','🏈','⚾','🎱','🏐',
+  '🧘','🧘‍♀️','🏄','🏄‍♀️','🥊','🤾','🚵','🧗','⛹️','🎯',
+  '🏇','🤼','🥋','🎿','🏂','🪂','🏌️','🤺','🥅','🎽',
+];
 
 const CORES_ATIV = [
   '#ef4444','#f97316','#f59e0b','#eab308','#84cc16',
@@ -967,9 +1285,7 @@ const METRICAS_LABELS = {
   duracao:    '⏱ Duração',
   distancia:  '📏 Distância',
   intensidade:'🔥 Intensidade',
-  tipo:       '📍 Tipo/Local',
   humor:      '😊 Humor',
-  nota:       '📝 Nota',
 };
 
 const HUMOR_OPTS = ['😞','😐','🙂','😄','🤩'];
@@ -987,8 +1303,60 @@ let _histFilter  = 'all';
 let _periodoSel  = 'mes';   // hoje | semana | mes | ano | custom
 let _filtroDataDe  = '';
 let _filtroDataAte = '';
+let _filtroModal   = 'all';  // modalidade selecionada no resumo
+let _detailAtivId  = null;   // atividade aberta no detalhe
+let _detailPeriodo = 'ano';  // periodo do detalhe
 let _regAtivSel  = null;
 let _regMetricas = {};
+
+// ── CALLBACKS FIREBASE ──────────────────────────────
+window._appOnLogin = function(user, ativs, regs) {
+  atividades = ativs;
+  registros  = regs;
+
+  // Topbar
+  const wrap = document.getElementById('userAvatarWrap');
+  if (user.photoURL) {
+    wrap.innerHTML = `<img class="user-avatar" src="${user.photoURL}" referrerpolicy="no-referrer">`;
+  } else {
+    const ini = (user.displayName || user.email || '?')[0].toUpperCase();
+    wrap.innerHTML = `<div class="user-avatar-ph">${ini}</div>`;
+  }
+  document.getElementById('userDisplayName').textContent = user.displayName || user.email;
+
+  // Esconde login, mostra app
+  document.getElementById('loginScreen').style.display    = 'none';
+  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById('app').style.display            = 'flex';
+
+  aplicarTema(tema);
+  init();
+};
+
+window._appOnLogout = function() {
+  atividades = []; registros = [];
+  document.getElementById('app').style.display            = 'none';
+  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById('loginScreen').style.display    = 'flex';
+};
+
+function fazerLogin() {
+  if (!window._fb) { setTimeout(fazerLogin, 100); return; }
+  document.getElementById('loginScreen').style.display    = 'none';
+  document.getElementById('loadingOverlay').style.display = 'flex';
+  window._fb.signInWithPopup(window._fb.auth, window._fb.provider)
+    .catch(e => {
+      console.error(e);
+      document.getElementById('loadingOverlay').style.display = 'none';
+      document.getElementById('loginScreen').style.display    = 'flex';
+      alert('Erro ao fazer login. Tente novamente.');
+    });
+}
+
+function fazerLogout() {
+  if (!window._fb) return;
+  window._fb.signOut(window._fb.auth);
+}
 
 // ── INIT ─────────────────────────────────────────────
 function init() {
@@ -1159,19 +1527,77 @@ function renderModalDia(dStr, regs) {
   list.innerHTML = regs.map(r => {
     const a = atividades.find(a => a.id === r.atividadeId);
     if (!a) return '';
+    const rows = [];
+    if (r.tipo)        rows.push(['📍', r.tipo]);
+    if (r.duracao)     rows.push(['⏱', r.duracao + ' min']);
+    if (r.distancia)   rows.push(['📏', r.distancia + ' km']);
+    if (r.intensidade) rows.push(['🔥', r.intensidade]);
+    if (r.humor)       rows.push(['', r.humor]);
+    const detalhesHtml = rows.length ? `
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+        ${rows.map(([icon, val]) => `
+          <span style="display:inline-flex;align-items:center;gap:3px;background:var(--surface3);
+            border-radius:20px;padding:4px 10px;font-size:12px;font-weight:500;color:var(--text2)">
+            ${icon} ${val}
+          </span>`).join('')}
+      </div>` : '';
+    const notaHtml = r.nota ? `
+      <div style="margin-top:8px;padding:10px 12px;background:var(--surface3);border-radius:10px;
+        font-size:12px;color:var(--text2);font-style:italic;line-height:1.5">
+        "${r.nota}"
+      </div>` : '';
     return `
-      <div class="registro-card" style="margin-bottom:8px">
-        <div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
-        <div class="registro-body">
-          <div class="registro-nome">${a.nome}</div>
-          <div class="registro-meta">${buildMeta(r, a)}</div>
+      <div style="background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);
+        padding:14px;margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:${rows.length||r.nota?'0':'0'}">
+          <div style="width:42px;height:42px;border-radius:12px;background:${a.cor}20;
+            display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${a.emoji}</div>
+          <div style="flex:1">
+            <div style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--text)">${a.nome}</div>
+          </div>
+          <button class="registro-action-btn" onclick="editarRegistro('${r.id}')" style="width:32px;height:32px">✏️</button>
+          <button class="registro-action-btn del" onclick="deletarRegistroDia('${r.id}')" style="width:32px;height:32px">🗑</button>
         </div>
-        <div class="registro-actions">
-          <button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
-          <button class="registro-action-btn del" onclick="deletarRegistro('${r.id}')">🗑</button>
-        </div>
+        ${detalhesHtml}
+        ${notaHtml}
       </div>`;
   }).join('');
+}
+
+function buildDetalhes(r, a) {
+  const rows = [];
+  if (r.tipo)        rows.push(['📍 Modalidade', r.tipo]);
+  if (r.duracao)     rows.push(['⏱ Duração', r.duracao + ' min']);
+  if (r.distancia)   rows.push(['📏 Distância', r.distancia + ' km']);
+  if (r.intensidade) rows.push(['🔥 Intensidade', r.intensidade]);
+  if (r.humor)       rows.push(['😊 Humor', r.humor]);
+  if (r.nota)        rows.push(['📝 Nota', r.nota]);
+  if (!rows.length)  return '<div style="font-size:13px;color:var(--text3);padding:8px 0">Sem detalhes registrados.</div>';
+  return `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+    ${rows.map(([k,v]) => `
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;color:var(--text2)">${k}</span>
+        <span style="font-size:13px;font-weight:600;color:var(--text)">${v}</span>
+      </div>`).join('')}
+  </div>`;
+}
+
+function deletarRegistroDia(id) {
+  if (!confirm('Excluir este registro?')) return;
+  registros = registros.filter(r => r.id !== id);
+  deletarRegFirestore(id);
+  const regs = registros.filter(r => r.data === _diaModal);
+  if (regs.length) {
+    renderModalDia(_diaModal, regs);
+  } else {
+    fecharModal('modalDia');
+    renderToday();
+    renderCalendario();
+    renderGreeting();
+  }
+  renderToday();
+  renderCalendario();
+  renderGreeting();
 }
 
 function abrirRegistroDesdeModal() {
@@ -1285,13 +1711,16 @@ function renderRegMetricas() {
 
   let html = '<div class="divider"></div>';
 
-  if (a.tipos?.length && a.metricas.includes('tipo')) {
-    html += `<div class="field"><label>Tipo / Local</label>
-      <div class="select-wrap">
-        <select id="rm_tipo" onchange="_regMetricas.tipo=this.value">
-          <option value="">Selecione…</option>
-          ${a.tipos.map(t=>`<option value="${t}"${_regMetricas.tipo===t?' selected':''}>${t}</option>`).join('')}
-        </select>
+  if (a.tipos?.length) { // modalidades sempre aparecem se cadastradas
+    const selTipo = _regMetricas.tipo || '';
+    html += `<div class="field"><label>Tipo / Modalidade</label>
+      <div class="toggle-group">
+        ${a.tipos.map(t => `
+          <div class="toggle-opt${selTipo===t?' selected':''}"
+            style="${selTipo===t?`background:${a.cor}20;border-color:${a.cor};color:${a.cor}`:''}"
+            onclick="_regMetricas.tipo='${t}'; renderRegMetricas()">
+            ${t}
+          </div>`).join('')}
       </div></div>`;
   }
 
@@ -1331,12 +1760,11 @@ function renderRegMetricas() {
       </div></div>`;
   }
 
-  if (a.metricas.includes('nota')) {
-    html += `<div class="field"><label>Observações</label>
-      <textarea id="rm_nota" placeholder="Como foi o treino?"
-        oninput="_regMetricas.nota=this.value">${_regMetricas.nota||''}</textarea>
-    </div>`;
-  }
+  // Comentários sempre aparecem
+  html += `<div class="field"><label>Comentários (opcional)</label>
+    <textarea id="rm_nota" placeholder="Como foi o treino? Alguma observação?"
+      oninput="_regMetricas.nota=this.value">${_regMetricas.nota||''}</textarea>
+  </div>`;
 
   wrap.innerHTML = html;
 }
@@ -1368,7 +1796,7 @@ function salvarRegistro() {
     registros.unshift(reg);
   }
 
-  salvarDados();
+  salvarRegFirestore(reg);
   fecharModal('modalRegistro');
   renderToday();
   renderCalendario();
@@ -1378,7 +1806,7 @@ function salvarRegistro() {
 function deletarRegistro(id) {
   if (!confirm('Deletar este registro?')) return;
   registros = registros.filter(r => r.id !== id);
-  salvarDados();
+  deletarRegFirestore(id);
   fecharModal('modalDia');
   renderToday();
   renderCalendario();
@@ -1406,7 +1834,7 @@ function abrirModalAtividade(id) {
     document.getElementById('ativNome').value = '';
     _ativEmoji    = EMOJIS[0];
     _ativCor      = CORES_ATIV[5];
-    _ativMetricas = ['duracao','intensidade'];
+    _ativMetricas = ['duracao','intensidade','humor'];
     _ativTipos    = [];
     document.getElementById('modalAtivTitle').textContent = 'Nova atividade';
     setTimeout(() => {
@@ -1495,6 +1923,119 @@ function salvarAtividade() {
   renderAtividades();
 }
 
+function abrirDetalheAtividade(id) {
+  _detailAtivId  = id;
+  _detailPeriodo = 'ano';
+  renderDetalheAtividade();
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-ativ-detail').classList.add('active');
+  document.querySelector('.fab').style.display = 'none';
+}
+
+function voltarAtividades() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-ativ').classList.add('active');
+  document.querySelector('.fab').style.display = 'flex';
+}
+
+function renderDetalheAtividade() {
+  const a = atividades.find(a => a.id === _detailAtivId);
+  if (!a) return;
+
+  // Header
+  const iconEl = document.getElementById('detailIcon');
+  iconEl.textContent = a.emoji;
+  iconEl.style.background = a.cor + '20';
+  document.getElementById('detailNome').textContent = a.nome;
+  document.getElementById('detailEditBtn').onclick = () => abrirModalAtividade(a.id);
+
+  // Totais rápidos
+  const agora  = new Date();
+  const anoStr = String(agora.getFullYear());
+  const mesStr = anoStr + '-' + String(agora.getMonth()+1).padStart(2,'0');
+  const regsAno = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(anoStr));
+  const regsMes = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(mesStr));
+  const regsAll = registros.filter(r => r.atividadeId === a.id);
+  document.getElementById('detailTotais').innerHTML = `
+    <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsAll.length}</div><div class="total-chip-label">no total</div></div>
+    <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsAno.length}</div><div class="total-chip-label">este ano</div></div>
+    <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsMes.length}</div><div class="total-chip-label">este mês</div></div>`;
+
+  // Meta info
+  if (a.metaQtd && a.metaTipo) {
+    const base = a.metaTipo === 'anual' ? regsAno : regsMes;
+    const pct  = Math.min(100, Math.round(base.length / a.metaQtd * 100));
+    document.getElementById('detailMeta').textContent = `Meta: ${base.length}/${a.metaQtd} ${a.metaTipo === 'anual' ? 'este ano' : 'este mês'}`;
+    document.getElementById('detailProgressoWrap').innerHTML = `
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:11px;color:var(--text2)">Progresso da meta</span>
+        <span style="font-size:11px;font-weight:700;color:${a.cor}">${pct}%</span>
+      </div>
+      <div style="height:6px;background:var(--surface3);border-radius:99px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${a.cor};border-radius:99px;transition:width 0.4s"></div>
+      </div>`;
+  } else {
+    document.getElementById('detailMeta').textContent = '';
+    document.getElementById('detailProgressoWrap').innerHTML = '';
+  }
+
+  // Período selector
+  const periodos = [
+    { id: 'mes',  label: 'Este mês' },
+    { id: 'ano',  label: 'Este ano' },
+    { id: 'tudo', label: 'Tudo'     },
+  ];
+  document.getElementById('detailPeriodoOpts').innerHTML = periodos.map(p => `
+    <div class="filter-chip${_detailPeriodo===p.id?' active':''}"
+      onclick="_detailPeriodo='${p.id}'; renderDetalheAtividade()">${p.label}</div>`).join('');
+
+  // Lista registros filtrada
+  let regsVis;
+  if (_detailPeriodo === 'mes')  regsVis = regsMes;
+  else if (_detailPeriodo === 'ano') regsVis = regsAno;
+  else regsVis = regsAll;
+  regsVis = [...regsVis].sort((x,y) => y.data.localeCompare(x.data));
+
+  const listEl = document.getElementById('detailRegistrosList');
+  if (!regsVis.length) {
+    listEl.innerHTML = '<div class="hist-empty"><div class="hist-empty-icon">📋</div>Nenhum registro neste período</div>';
+    return;
+  }
+
+  const porData = {};
+  regsVis.forEach(r => {
+    if (!porData[r.data]) porData[r.data] = [];
+    porData[r.data].push(r);
+  });
+
+  listEl.innerHTML = Object.entries(porData)
+    .sort((x,y) => y[0].localeCompare(x[0]))
+    .map(([data, regs]) => `
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:4px 2px;margin-top:4px">${fmtData(data)}</div>
+      ${regs.map(r => `
+        <div class="registro-card">
+          <div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
+          <div class="registro-body">
+            <div class="registro-nome">${a.nome}${r.tipo ? ' · <span style="font-size:11px;color:var(--text2)">' + r.tipo + '</span>' : ''}</div>
+            <div class="registro-meta">${buildMeta(r, a)}</div>
+          </div>
+          <div class="registro-actions">
+            <button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
+            <button class="registro-action-btn del" onclick="deletarRegistroDetalhe('${r.id}')">🗑</button>
+          </div>
+        </div>`).join('')}`).join('');
+}
+
+function deletarRegistroDetalhe(id) {
+  if (!confirm('Excluir este registro?')) return;
+  registros = registros.filter(r => r.id !== id);
+  deletarRegFirestore(id);
+  renderDetalheAtividade();
+  renderCalendario();
+  renderGreeting();
+  renderToday();
+}
+
 function deletarAtividade(id) {
   if (!confirm('Deletar esta atividade?')) return;
   atividades = atividades.filter(a => a.id !== id);
@@ -1549,16 +2090,28 @@ function renderAtividades() {
   }
 
   list.innerHTML = atividades.map(a => {
+    const agora   = new Date();
+    const anoStr  = String(agora.getFullYear());
+    const mesStr  = anoStr + '-' + String(agora.getMonth()+1).padStart(2,'0');
+    const regsAno = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(anoStr)).length;
+    const regsMes = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(mesStr)).length;
     const progressoHtml = buildProgresso(a);
     return `
-    <div class="ativ-card">
+    <div class="ativ-card" onclick="abrirDetalheAtividade('${a.id}')" style="cursor:pointer">
       <div class="ativ-icon-wrap" style="background:${a.cor}20">${a.emoji}</div>
       <div class="ativ-body">
-        <div class="ativ-nome">${a.nome}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="ativ-nome">${a.nome}</div>
+        </div>
         <div class="ativ-metricas">${a.metricas.map(m=>METRICAS_LABELS[m]).join(' · ')}</div>
+        <div style="display:flex;gap:10px;margin-top:5px">
+          <span style="font-size:11px;font-weight:700;color:${a.cor}">${regsAno} este ano</span>
+          <span style="font-size:11px;color:var(--text3)">·</span>
+          <span style="font-size:11px;color:var(--text2)">${regsMes} este mês</span>
+        </div>
         ${progressoHtml}
       </div>
-      <div class="ativ-actions">
+      <div class="ativ-actions" onclick="event.stopPropagation()">
         <button class="ativ-action-btn" onclick="abrirModalAtividade('${a.id}')">✏️</button>
         <button class="ativ-action-btn del" onclick="deletarAtividade('${a.id}')">🗑</button>
       </div>
@@ -1594,6 +2147,12 @@ function setPeriodo(p) {
 
 function setHistFilter(f) {
   _histFilter = f;
+  _filtroModal = 'all';
+  renderResumo();
+}
+
+function setFiltroModal(m) {
+  _filtroModal = m;
   renderResumo();
 }
 
@@ -1647,12 +2206,33 @@ function renderResumo() {
     filtersEl.innerHTML = chips.join('');
   }
 
+  // Filtro de modalidade (só aparece se atividade selecionada)
+  const modalidadeWrap = document.getElementById('modalidadeFiltroWrap');
+  const modalidadeOpts = document.getElementById('modalidadeFiltroOpts');
+  if (_histFilter !== 'all') {
+    const aFilt = atividades.find(a => a.id === _histFilter);
+    if (aFilt?.tipos?.length) {
+      modalidadeWrap.style.display = 'block';
+      const chips = [`<div class="filter-chip${_filtroModal==='all'?' active':''}" onclick="setFiltroModal('all')">Todas</div>`];
+      aFilt.tipos.forEach(t => {
+        chips.push(`<div class="filter-chip${_filtroModal===t?' active':''}" onclick="setFiltroModal('${t}')">${t}</div>`);
+      });
+      modalidadeOpts.innerHTML = chips.join('');
+    } else {
+      modalidadeWrap.style.display = 'none';
+    }
+  } else {
+    modalidadeWrap.style.display = 'none';
+    _filtroModal = 'all';
+  }
+
   // Aplica filtros
   const { de, ate } = getFiltroRange();
   const filtered = registros.filter(r => {
     const dentroData = (!de || r.data >= de) && (!ate || r.data <= ate);
     const dentroAtiv = _histFilter === 'all' || r.atividadeId === _histFilter;
-    return dentroData && dentroAtiv;
+    const dentroModal = _filtroModal === 'all' || r.tipo === _filtroModal;
+    return dentroData && dentroAtiv && dentroModal;
   });
 
   // Totais
@@ -1665,7 +2245,11 @@ function renderResumo() {
   let totHtml = `
     <div class="total-chip"><div class="total-chip-val">${totalRegs}</div><div class="total-chip-label">atividades</div></div>
     <div class="total-chip"><div class="total-chip-val">${totalDias}</div><div class="total-chip-label">dias ativos</div></div>`;
-  if (totalMin) totHtml += `<div class="total-chip"><div class="total-chip-val">${totalMin}min</div><div class="total-chip-label">de duração</div></div>`;
+  if (totalMin) {
+    const hh = String(Math.floor(totalMin / 60)).padStart(2,'0');
+    const mm = String(totalMin % 60).padStart(2,'0');
+    totHtml += `<div class="total-chip"><div class="total-chip-val">${hh}:${mm}</div><div class="total-chip-label">horas de treino</div></div>`;
+  }
   if (totalKm)  totHtml += `<div class="total-chip"><div class="total-chip-val">${totalKm.toFixed(1)}km</div><div class="total-chip-label">percorridos</div></div>`;
   if (totaisEl) totaisEl.innerHTML = totHtml;
 
@@ -1708,7 +2292,7 @@ function renderResumo() {
 function deletarRegistroHist(id) {
   if (!confirm('Deletar este registro?')) return;
   registros = registros.filter(r => r.id !== id);
-  salvarDados();
+  deletarRegFirestore(id);
   renderResumo();
   renderCalendario();
   renderGreeting();
@@ -1762,9 +2346,24 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 // ── PERSISTÊNCIA ────────────────────────────────────
+async function salvarAtivFirestore(ativ) {
+  const uid = window._fb?.currentUser?.uid;
+  if (uid) await window._fb.fsSalvarAtividade(uid, ativ);
+}
+async function deletarAtivFirestore(id) {
+  const uid = window._fb?.currentUser?.uid;
+  if (uid) await window._fb.fsDeletarAtividade(uid, id);
+}
+async function salvarRegFirestore(reg) {
+  const uid = window._fb?.currentUser?.uid;
+  if (uid) await window._fb.fsSalvarRegistro(uid, reg);
+}
+async function deletarRegFirestore(id) {
+  const uid = window._fb?.currentUser?.uid;
+  if (uid) await window._fb.fsDeletarRegistro(uid, id);
+}
 function salvarDados() {
-  localStorage.setItem('mt_atividades', JSON.stringify(atividades));
-  localStorage.setItem('mt_registros',  JSON.stringify(registros));
+  // Mantido para compatibilidade — dados salvos via funções específicas
 }
 
 // ── START ─────────────────────────────────────────────
