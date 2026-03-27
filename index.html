@@ -934,25 +934,51 @@ textarea { resize: none; min-height: 72px; }
     fsSalvarRegistro, fsDeletarRegistro, fsLimparTudo,
   };
 
-  // ── Trata retorno de redirect (mobile) ──────────────
-  getRedirectResult(auth).catch(e => console.error('Redirect result error:', e));
+  // ── Auth state + redirect handler ───────────────────
+  // Aguarda getRedirectResult antes de processar onAuthStateChanged
+  // para evitar loop no mobile onde user chega null antes do redirect completar
+  let redirectHandled = false;
 
-  // ── Auth state ───────────────────────────────────────
+  async function carregarEEntrar(user) {
+    window._fb.currentUser = user;
+    try {
+      const [ativs, regs] = await Promise.all([
+        fsCarregarAtividades(user.uid),
+        fsCarregarRegistros(user.uid),
+      ]);
+      console.log(`Firestore: ${ativs.length} atividades, ${regs.length} registros`);
+      window._appOnLogin(user, ativs, regs);
+    } catch(e) {
+      console.error('Erro ao carregar dados:', e);
+      window._appOnLoginErro(user, e);
+    }
+  }
+
+  // Primeiro trata redirect — se vier de um login mobile, já entra direto
+  getRedirectResult(auth)
+    .then(result => {
+      redirectHandled = true;
+      if (result?.user) {
+        carregarEEntrar(result.user);
+      }
+      // Se não veio de redirect, o onAuthStateChanged abaixo vai cuidar
+    })
+    .catch(e => {
+      redirectHandled = true;
+      console.error('Redirect result error:', e);
+    });
+
   onAuthStateChanged(auth, async (user) => {
+    // Se o redirect ainda não foi processado, aguarda um tick
+    if (!redirectHandled) {
+      await new Promise(r => setTimeout(r, 500));
+    }
+    // Se o redirect já logou o usuário, não faz nada
+    if (window._fb.currentUser) return;
+
     window._fb.currentUser = user;
     if (user) {
-      try {
-        const [ativs, regs] = await Promise.all([
-          fsCarregarAtividades(user.uid),
-          fsCarregarRegistros(user.uid),
-        ]);
-        console.log(`Firestore: ${ativs.length} atividades, ${regs.length} registros carregados`);
-        window._appOnLogin(user, ativs, regs);
-      } catch(e) {
-        console.error('Erro ao carregar dados do Firestore:', e);
-        // NÃO passa [] — mostra erro para o usuário em vez de limpar os dados
-        window._appOnLoginErro(user, e);
-      }
+      carregarEEntrar(user);
     } else {
       window._appOnLogout();
     }
