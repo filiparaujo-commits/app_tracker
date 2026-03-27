@@ -1356,6 +1356,7 @@ function fazerLogin() {
   if (!window._fb) { setTimeout(fazerLogin, 100); return; }
   document.getElementById('loginScreen').style.display    = 'none';
   document.getElementById('loadingOverlay').style.display = 'flex';
+  window._fb.provider.setCustomParameters({ prompt: 'select_account' });
   window._fb.signInWithPopup(window._fb.auth, window._fb.provider)
     .catch(e => {
       console.error(e);
