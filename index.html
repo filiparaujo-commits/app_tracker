@@ -1142,6 +1142,18 @@ textarea { resize: none; min-height: 72px; }
       <div class="cfg-section-title">Tema de cores</div>
       <div class="theme-grid" id="themeGrid"></div>
     </div>
+
+    <div class="cfg-section" style="margin-top:28px">
+      <div class="cfg-section-title">Dados</div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px">
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Resetar todos os dados</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.5">Remove todas as atividades e registros da sua conta. Essa ação não pode ser desfeita.</div>
+        <button onclick="confirmarReset()" style="width:100%;padding:12px;border-radius:var(--radius-sm);background:none;border:1.5px solid var(--bad);color:var(--bad);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s"
+          onmouseover="this.style.background='var(--bad-dim)'" onmouseout="this.style.background='none'">
+          🗑 Apagar todos os dados
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- ══ BOTTOM NAV ══ -->
@@ -2348,7 +2360,8 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 // ── PERSISTÊNCIA ────────────────────────────────────
 async function salvarAtivFirestore(ativ) {
   const uid = window._fb?.currentUser?.uid;
-  if (uid) await window._fb.fsSalvarAtividade(uid, ativ);
+  if (!uid) { console.error('salvarAtivFirestore: usuário não logado'); return; }
+  await window._fb.fsSalvarAtividade(uid, ativ);
 }
 async function deletarAtivFirestore(id) {
   const uid = window._fb?.currentUser?.uid;
@@ -2356,7 +2369,8 @@ async function deletarAtivFirestore(id) {
 }
 async function salvarRegFirestore(reg) {
   const uid = window._fb?.currentUser?.uid;
-  if (uid) await window._fb.fsSalvarRegistro(uid, reg);
+  if (!uid) { console.error('salvarRegFirestore: usuário não logado'); return; }
+  await window._fb.fsSalvarRegistro(uid, reg);
 }
 async function deletarRegFirestore(id) {
   const uid = window._fb?.currentUser?.uid;
@@ -2364,6 +2378,41 @@ async function deletarRegFirestore(id) {
 }
 function salvarDados() {
   // Mantido para compatibilidade — dados salvos via funções específicas
+}
+
+// ── RESET COMPLETO ──────────────────────────────────
+async function confirmarReset() {
+  const ok = confirm('Tem certeza? Isso vai apagar TODAS as atividades e registros da sua conta. Essa ação não pode ser desfeita.');
+  if (!ok) return;
+  const ok2 = confirm('Confirma mesmo? Todos os dados serão perdidos permanentemente.');
+  if (!ok2) return;
+
+  const uid = window._fb?.currentUser?.uid;
+  if (!uid) { alert('Erro: usuário não identificado.'); return; }
+
+  try {
+    // Feedback visual
+    const btn = document.querySelector('[onclick="confirmarReset()"]');
+    if (btn) { btn.textContent = '⏳ Apagando...'; btn.disabled = true; }
+
+    await window._fb.fsLimparTudo(uid);
+
+    atividades = [];
+    registros  = [];
+
+    renderAtividades();
+    renderCalendario();
+    renderToday();
+    renderGreeting();
+
+    if (btn) { btn.textContent = '✓ Dados apagados'; btn.style.borderColor = 'var(--good)'; btn.style.color = 'var(--good)'; }
+    setTimeout(() => {
+      if (btn) { btn.textContent = '🗑 Apagar todos os dados'; btn.style.borderColor = 'var(--bad)'; btn.style.color = 'var(--bad)'; btn.disabled = false; }
+    }, 3000);
+  } catch(e) {
+    console.error('Erro ao resetar:', e);
+    alert('Erro ao apagar os dados. Tente novamente.');
+  }
 }
 
 // ── START ─────────────────────────────────────────────
