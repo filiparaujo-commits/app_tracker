@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -10,803 +9,803 @@
 
 /* ── LOGIN SCREEN ── */
 #loginScreen {
-position: fixed; inset: 0;
-background: var(–bg);
-display: flex; flex-direction: column;
-align-items: center; justify-content: center;
-z-index: 999; padding: 40px 32px;
-text-align: center;
+  position: fixed; inset: 0;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 999; padding: 40px 32px;
+  text-align: center;
 }
 
 .login-blob {
-position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
 }
 .login-blob::before {
-content: ‘’;
-position: absolute;
-width: 300px; height: 300px;
-background: radial-gradient(circle, var(–accent-dim) 0%, transparent 70%);
-top: -60px; left: -60px; border-radius: 50%;
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+  top: -60px; left: -60px; border-radius: 50%;
 }
 .login-blob::after {
-content: ‘’;
-position: absolute;
-width: 250px; height: 250px;
-background: radial-gradient(circle, var(–accent-dim) 0%, transparent 70%);
-bottom: 40px; right: -40px; border-radius: 50%;
+  content: '';
+  position: absolute;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+  bottom: 40px; right: -40px; border-radius: 50%;
 }
 
 .login-content { position: relative; z-index: 1; }
 
 .login-app-icon {
-width: 80px; height: 80px;
-background: var(–accent);
-border-radius: 22px;
-display: flex; align-items: center; justify-content: center;
-font-size: 38px;
-margin: 0 auto 24px;
-box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  width: 80px; height: 80px;
+  background: var(--accent);
+  border-radius: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 38px;
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
 
 .login-app-name {
-font-family: ‘Outfit’, sans-serif;
-font-size: 32px; font-weight: 800;
-color: var(–text); line-height: 1.1;
-margin-bottom: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px; font-weight: 800;
+  color: var(--text); line-height: 1.1;
+  margin-bottom: 8px;
 }
-.login-app-name span { color: var(–accent); }
+.login-app-name span { color: var(--accent); }
 
 .login-tagline {
-font-size: 15px; color: var(–text2);
-line-height: 1.5; margin-bottom: 40px;
-font-weight: 400;
+  font-size: 15px; color: var(--text2);
+  line-height: 1.5; margin-bottom: 40px;
+  font-weight: 400;
 }
 
 .login-features {
-display: flex; flex-direction: column; gap: 10px;
-margin-bottom: 40px; text-align: left;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 40px; text-align: left;
 }
 .login-feature {
-display: flex; align-items: center; gap: 12px;
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 14px; padding: 12px 16px;
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 12px 16px;
 }
 .login-feature-icon {
-width: 36px; height: 36px;
-background: var(–accent-dim);
-border-radius: 10px;
-display: flex; align-items: center; justify-content: center;
-font-size: 18px; flex-shrink: 0;
+  width: 36px; height: 36px;
+  background: var(--accent-dim);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
 }
-.login-feature-text { font-size: 13px; color: var(–text2); line-height: 1.4; }
-.login-feature-text strong { color: var(–text); font-weight: 600; display: block; }
+.login-feature-text { font-size: 13px; color: var(--text2); line-height: 1.4; }
+.login-feature-text strong { color: var(--text); font-weight: 600; display: block; }
 
 .btn-google-login {
-width: 100%;
-display: flex; align-items: center; justify-content: center; gap: 12px;
-padding: 16px 24px;
-border-radius: 16px;
-background: var(–surface);
-border: 1.5px solid var(–border);
-color: var(–text);
-font-family: ‘Outfit’, sans-serif;
-font-size: 16px; font-weight: 600;
-cursor: pointer;
-transition: all 0.2s;
-box-shadow: var(–shadow);
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
 }
 .btn-google-login:hover {
-border-color: var(–accent);
-box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-transform: translateY(-1px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
 }
 .btn-google-login svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 .login-disclaimer {
-font-size: 11px; color: var(–text3);
-margin-top: 16px; line-height: 1.5;
+  font-size: 11px; color: var(--text3);
+  margin-top: 16px; line-height: 1.5;
 }
 
 /* ── TOPBAR USUARIO ── */
 .user-topbar {
-display: flex; align-items: center; gap: 10px;
-padding: 12px 16px 0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px 0;
 }
 .user-avatar {
-width: 32px; height: 32px; border-radius: 50%;
-border: 2px solid var(–border); object-fit: cover;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--border); object-fit: cover;
 }
 .user-avatar-ph {
-width: 32px; height: 32px; border-radius: 50%;
-background: var(–accent-dim); border: 2px solid var(–accent);
-display: flex; align-items: center; justify-content: center;
-font-size: 14px; font-weight: 700; color: var(–accent-text);
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--accent-dim); border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: var(--accent-text);
 }
 .user-display-name {
-font-family: ‘Sora’, sans-serif;
-font-size: 13px; font-weight: 500; color: var(–text2); flex: 1;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px; font-weight: 500; color: var(--text2); flex: 1;
 }
 .btn-logout {
-background: none; border: 1px solid var(–border);
-border-radius: 8px; padding: 5px 10px;
-font-family: ‘Outfit’, sans-serif; font-size: 12px;
-color: var(–text3); cursor: pointer; transition: all 0.15s;
+  background: none; border: 1px solid var(--border);
+  border-radius: 8px; padding: 5px 10px;
+  font-family: 'Outfit', sans-serif; font-size: 12px;
+  color: var(--text3); cursor: pointer; transition: all 0.15s;
 }
-.btn-logout:hover { border-color: var(–bad); color: var(–bad); }
+.btn-logout:hover { border-color: var(--bad); color: var(--bad); }
 
 /* loading overlay */
 #loadingOverlay {
-position: fixed; inset: 0; background: var(–bg);
-display: flex; align-items: center; justify-content: center;
-z-index: 998; flex-direction: column; gap: 16px;
+  position: fixed; inset: 0; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 998; flex-direction: column; gap: 16px;
 }
 .loading-spinner {
-width: 40px; height: 40px;
-border: 3px solid var(–accent-dim);
-border-top-color: var(–accent);
-border-radius: 50%;
-animation: spin 0.7s linear infinite;
+  width: 40px; height: 40px;
+  border: 3px solid var(--accent-dim);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loading-text { font-family: ‘Outfit’, sans-serif; font-size: 14px; color: var(–text2); }
+.loading-text { font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--text2); }
 
 /* ── TEMAS ── */
 :root {
-–accent:      #8b5cf6;
-–accent2:     #a78bfa;
-–accent-dim:  rgba(139,92,246,0.12);
-–accent-dim2: rgba(139,92,246,0.07);
-–accent-text: #6d28d9;
+  --accent:      #8b5cf6;
+  --accent2:     #a78bfa;
+  --accent-dim:  rgba(139,92,246,0.12);
+  --accent-dim2: rgba(139,92,246,0.07);
+  --accent-text: #6d28d9;
 }
-[data-theme=“azul”] {
-–accent:      #3b82f6;
-–accent2:     #60a5fa;
-–accent-dim:  rgba(59,130,246,0.12);
-–accent-dim2: rgba(59,130,246,0.07);
-–accent-text: #1d4ed8;
+[data-theme="azul"] {
+  --accent:      #3b82f6;
+  --accent2:     #60a5fa;
+  --accent-dim:  rgba(59,130,246,0.12);
+  --accent-dim2: rgba(59,130,246,0.07);
+  --accent-text: #1d4ed8;
 }
-[data-theme=“verde”] {
-–accent:      #10b981;
-–accent2:     #34d399;
-–accent-dim:  rgba(16,185,129,0.12);
-–accent-dim2: rgba(16,185,129,0.07);
-–accent-text: #047857;
+[data-theme="verde"] {
+  --accent:      #10b981;
+  --accent2:     #34d399;
+  --accent-dim:  rgba(16,185,129,0.12);
+  --accent-dim2: rgba(16,185,129,0.07);
+  --accent-text: #047857;
 }
-[data-theme=“laranja”] {
-–accent:      #f97316;
-–accent2:     #fb923c;
-–accent-dim:  rgba(249,115,22,0.12);
-–accent-dim2: rgba(249,115,22,0.07);
-–accent-text: #c2410c;
+[data-theme="laranja"] {
+  --accent:      #f97316;
+  --accent2:     #fb923c;
+  --accent-dim:  rgba(249,115,22,0.12);
+  --accent-dim2: rgba(249,115,22,0.07);
+  --accent-text: #c2410c;
 }
-[data-theme=“rosa”] {
-–accent:      #ec4899;
-–accent2:     #f472b6;
-–accent-dim:  rgba(236,72,153,0.12);
-–accent-dim2: rgba(236,72,153,0.07);
-–accent-text: #be185d;
+[data-theme="rosa"] {
+  --accent:      #ec4899;
+  --accent2:     #f472b6;
+  --accent-dim:  rgba(236,72,153,0.12);
+  --accent-dim2: rgba(236,72,153,0.07);
+  --accent-text: #be185d;
 }
 
 /* ── BASE ── */
 :root {
-–bg:       #f5f5f7;
-–surface:  #ffffff;
-–surface2: #f0f0f3;
-–surface3: #e8e8ed;
-–border:   #e2e2e8;
-–text:     #1a1a2e;
-–text2:    #6b6b80;
-–text3:    #a0a0b0;
-–bad:      #ef4444;
-–bad-dim:  rgba(239,68,68,0.1);
-–good:     #10b981;
-–shadow:   0 2px 12px rgba(0,0,0,0.06);
-–shadow2:  0 8px 32px rgba(0,0,0,0.10);
-–radius:   18px;
-–radius-sm:12px;
+  --bg:       #f5f5f7;
+  --surface:  #ffffff;
+  --surface2: #f0f0f3;
+  --surface3: #e8e8ed;
+  --border:   #e2e2e8;
+  --text:     #1a1a2e;
+  --text2:    #6b6b80;
+  --text3:    #a0a0b0;
+  --bad:      #ef4444;
+  --bad-dim:  rgba(239,68,68,0.1);
+  --good:     #10b981;
+  --shadow:   0 2px 12px rgba(0,0,0,0.06);
+  --shadow2:  0 8px 32px rgba(0,0,0,0.10);
+  --radius:   18px;
+  --radius-sm:12px;
 }
 
-- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 html, body {
-height: 100%;
-overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-font-family: ‘Plus Jakarta Sans’, sans-serif;
-background: var(–bg);
-color: var(–text);
-max-width: 430px;
-margin: 0 auto;
-position: relative;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
 }
 
 /* ── LAYOUT ── */
 #app {
-height: 100vh;
-display: flex;
-flex-direction: column;
-overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .screen {
-display: none;
-flex: 1;
-overflow-y: auto;
-padding: 0 0 80px;
--webkit-overflow-scrolling: touch;
+  display: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 0 80px;
+  -webkit-overflow-scrolling: touch;
 }
 .screen.active { display: block; }
 
 /* ── BOTTOM NAV ── */
 .bottom-nav {
-position: fixed;
-bottom: 0; left: 50%;
-transform: translateX(-50%);
-width: 100%; max-width: 430px;
-background: var(–surface);
-border-top: 1px solid var(–border);
-display: flex;
-z-index: 100;
-padding-bottom: env(safe-area-inset-bottom);
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 430px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .nav-btn {
-flex: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 3px;
-padding: 10px 0 8px;
-background: none;
-border: none;
-cursor: pointer;
-color: var(–text3);
-font-family: ‘Plus Jakarta Sans’, sans-serif;
-font-size: 10px;
-font-weight: 500;
-transition: color 0.15s;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 0 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text3);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  transition: color 0.15s;
 }
 .nav-btn .nav-icon { font-size: 20px; line-height: 1; transition: transform 0.2s; }
-.nav-btn.active { color: var(–accent); }
+.nav-btn.active { color: var(--accent); }
 .nav-btn.active .nav-icon { transform: scale(1.15); }
 
 /* ── FAB ── */
 .fab {
-position: fixed;
-bottom: 72px;
-right: 20px;
-transform: none;
-width: 52px; height: 52px;
-border-radius: 50%;
-background: var(–accent);
-color: #fff;
-font-size: 26px;
-border: none;
-cursor: pointer;
-display: flex; align-items: center; justify-content: center;
-box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-transition: transform 0.2s, box-shadow 0.2s;
-z-index: 99;
-line-height: 1;
+  position: fixed;
+  bottom: 72px;
+  right: 20px;
+  transform: none;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 26px;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 99;
+  line-height: 1;
 }
 .fab:active { transform: scale(0.93); }
 
 /* ── HOME SCREEN ── */
 .home-header {
-padding: 52px 20px 20px;
-background: var(–surface);
+  padding: 52px 20px 20px;
+  background: var(--surface);
 }
 
 .home-greeting {
-font-family: ‘Outfit’, sans-serif;
-font-size: 13px;
-font-weight: 500;
-color: var(–text3);
-text-transform: uppercase;
-letter-spacing: 0.1em;
-margin-bottom: 4px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
 }
 
 .home-title {
-font-family: ‘Outfit’, sans-serif;
-font-size: 26px;
-font-weight: 700;
-color: var(–text);
-line-height: 1.1;
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
 }
-.home-title span { color: var(–accent); }
+.home-title span { color: var(--accent); }
 
 /* ── CALENDÁRIO ── */
 .cal-wrap {
-margin: 14px 16px 0;
-background: var(–surface);
-border-radius: var(–radius);
-padding: 18px;
-box-shadow: var(–shadow);
+  margin: 14px 16px 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
 }
 
 .cal-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
 }
 
 .cal-month {
-font-family: ‘Outfit’, sans-serif;
-font-size: 16px;
-font-weight: 700;
-color: var(–text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
 }
 
 .cal-nav {
-display: flex; gap: 4px;
+  display: flex; gap: 4px;
 }
 .cal-nav button {
-background: var(–surface2);
-border: none;
-border-radius: 8px;
-width: 30px; height: 30px;
-font-size: 14px;
-cursor: pointer;
-color: var(–text2);
-transition: all 0.15s;
+  background: var(--surface2);
+  border: none;
+  border-radius: 8px;
+  width: 30px; height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text2);
+  transition: all 0.15s;
 }
-.cal-nav button:hover { background: var(–accent-dim); color: var(–accent); }
+.cal-nav button:hover { background: var(--accent-dim); color: var(--accent); }
 
 .cal-weekdays {
-display: grid;
-grid-template-columns: repeat(7, 1fr);
-margin-bottom: 6px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
 }
 .cal-weekday {
-text-align: center;
-font-size: 10px;
-font-weight: 600;
-color: var(–text3);
-text-transform: uppercase;
-letter-spacing: 0.05em;
-padding: 4px 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 0;
 }
 
 .cal-days {
-display: grid;
-grid-template-columns: repeat(7, 1fr);
-gap: 3px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
 }
 
 .cal-day {
-aspect-ratio: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-border-radius: 10px;
-cursor: pointer;
-transition: all 0.15s;
-position: relative;
-gap: 2px;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  gap: 2px;
 }
-.cal-day:hover { background: var(–surface2); }
+.cal-day:hover { background: var(--surface2); }
 .cal-day.empty { cursor: default; }
 .cal-day.today {
-background: var(–accent-dim);
+  background: var(--accent-dim);
 }
-.cal-day.today .cal-day-num { color: var(–accent); font-weight: 700; }
+.cal-day.today .cal-day-num { color: var(--accent); font-weight: 700; }
 .cal-day.has-activity { cursor: pointer; }
 
 .cal-day-num {
-font-family: ‘Outfit’, sans-serif;
-font-size: 13px;
-font-weight: 500;
-color: var(–text);
-line-height: 1;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1;
 }
-.cal-day.other-month .cal-day-num { color: var(–text3); }
+.cal-day.other-month .cal-day-num { color: var(--text3); }
 
 .cal-dots {
-display: flex;
-gap: 2px;
-flex-wrap: wrap;
-justify-content: center;
-max-width: 28px;
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 28px;
 }
 .cal-dot {
-width: 5px; height: 5px;
-border-radius: 50%;
-flex-shrink: 0;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* ── TODAY ACTIVITIES ── */
 .today-section {
-margin: 14px 16px 0;
+  margin: 14px 16px 0;
 }
 
 .section-title {
-font-family: ‘Outfit’, sans-serif;
-font-size: 13px;
-font-weight: 600;
-color: var(–text3);
-text-transform: uppercase;
-letter-spacing: 0.08em;
-margin-bottom: 10px;
-padding: 0 4px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  padding: 0 4px;
 }
 
 .today-empty {
-background: var(–surface);
-border-radius: var(–radius);
-padding: 24px;
-text-align: center;
-box-shadow: var(–shadow);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
 }
 .today-empty-icon { font-size: 32px; margin-bottom: 8px; }
-.today-empty-text { font-size: 14px; color: var(–text2); }
+.today-empty-text { font-size: 14px; color: var(--text2); }
 
 .registro-card {
-background: var(–surface);
-border-radius: var(–radius-sm);
-padding: 14px 16px;
-margin-bottom: 8px;
-box-shadow: var(–shadow);
-display: flex;
-align-items: center;
-gap: 12px;
-animation: slideIn 0.2s ease;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: slideIn 0.2s ease;
 }
 @keyframes slideIn {
-from { opacity: 0; transform: translateY(8px); }
-to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .registro-color {
-width: 42px; height: 42px;
-border-radius: 12px;
-display: flex; align-items: center; justify-content: center;
-font-size: 20px;
-flex-shrink: 0;
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
 }
 
 .registro-body { flex: 1; min-width: 0; }
 .registro-nome {
-font-family: ‘Outfit’, sans-serif;
-font-size: 15px; font-weight: 600;
-color: var(–text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--text);
 }
 .registro-meta {
-font-size: 12px; color: var(–text2);
-margin-top: 2px;
-white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 12px; color: var(--text2);
+  margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .registro-actions { display: flex; gap: 4px; flex-shrink: 0; }
 .registro-action-btn {
-background: none; border: none;
-width: 30px; height: 30px;
-border-radius: 8px;
-font-size: 14px;
-cursor: pointer; color: var(–text3);
-transition: all 0.15s;
-display: flex; align-items: center; justify-content: center;
+  background: none; border: none;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer; color: var(--text3);
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
 }
-.registro-action-btn:hover { background: var(–surface2); color: var(–text); }
-.registro-action-btn.del:hover { background: var(–bad-dim); color: var(–bad); }
+.registro-action-btn:hover { background: var(--surface2); color: var(--text); }
+.registro-action-btn.del:hover { background: var(--bad-dim); color: var(--bad); }
 
 /* ── HISTÓRICO ── */
 .hist-header {
-padding: 52px 20px 16px;
-background: var(–surface);
+  padding: 52px 20px 16px;
+  background: var(--surface);
 }
 .hist-title {
-font-family: ‘Outfit’, sans-serif;
-font-size: 26px; font-weight: 700;
-color: var(–text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px; font-weight: 700;
+  color: var(--text);
 }
 
 .hist-totais {
-display: flex; gap: 8px;
-margin: 14px 16px 0;
-overflow-x: auto;
-padding-bottom: 4px;
-scrollbar-width: none;
+  display: flex; gap: 8px;
+  margin: 14px 16px 0;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
 }
 .hist-totais::-webkit-scrollbar { display: none; }
 
 .total-chip {
-background: var(–surface);
-border-radius: var(–radius-sm);
-padding: 12px 16px;
-box-shadow: var(–shadow);
-flex-shrink: 0;
-min-width: 100px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+  min-width: 100px;
 }
 .total-chip-val {
-font-family: ‘Outfit’, sans-serif;
-font-size: 22px; font-weight: 700;
-color: var(–accent);
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--accent);
 }
-.total-chip-label { font-size: 11px; color: var(–text2); margin-top: 2px; }
+.total-chip-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
 
 .hist-filters {
-display: flex; gap: 8px;
-margin: 14px 16px 0;
-overflow-x: auto;
-scrollbar-width: none;
+  display: flex; gap: 8px;
+  margin: 14px 16px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 .hist-filters::-webkit-scrollbar { display: none; }
 
 .filter-chip {
-padding: 7px 14px;
-border-radius: 20px;
-border: 1.5px solid var(–border);
-background: var(–surface);
-color: var(–text2);
-font-family: ‘Plus Jakarta Sans’, sans-serif;
-font-size: 12px; font-weight: 500;
-cursor: pointer; transition: all 0.15s;
-white-space: nowrap; flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  white-space: nowrap; flex-shrink: 0;
 }
-.filter-chip:hover { border-color: var(–accent); color: var(–accent); }
-.filter-chip.active { background: var(–accent-dim); border-color: var(–accent); color: var(–accent-text); font-weight: 600; }
+.filter-chip:hover { border-color: var(--accent); color: var(--accent); }
+.filter-chip.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
 
 .hist-export-btn {
-margin: 12px 16px 0;
-width: calc(100% - 32px);
-padding: 12px;
-border-radius: var(–radius-sm);
-border: 1.5px solid var(–border);
-background: var(–surface);
-color: var(–text2);
-font-family: ‘Outfit’, sans-serif;
-font-size: 14px; font-weight: 500;
-cursor: pointer; transition: all 0.15s;
-display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin: 12px 16px 0;
+  width: calc(100% - 32px);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
 }
-.hist-export-btn:hover { border-color: var(–accent); color: var(–accent); background: var(–accent-dim2); }
+.hist-export-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim2); }
 
 .hist-list { margin: 12px 16px 0; display: flex; flex-direction: column; gap: 8px; }
 
 .hist-empty {
-text-align: center; padding: 50px 20px;
-color: var(–text3); font-size: 15px;
+  text-align: center; padding: 50px 20px;
+  color: var(--text3); font-size: 15px;
 }
 .hist-empty-icon { font-size: 40px; margin-bottom: 10px; }
 
 /* ── ATIVIDADES ── */
 .ativ-header {
-padding: 52px 20px 16px;
-background: var(–surface);
+  padding: 52px 20px 16px;
+  background: var(--surface);
 }
 .ativ-title {
-font-family: ‘Outfit’, sans-serif;
-font-size: 26px; font-weight: 700; color: var(–text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px; font-weight: 700; color: var(--text);
 }
-.ativ-sub { font-size: 13px; color: var(–text2); margin-top: 4px; }
+.ativ-sub { font-size: 13px; color: var(--text2); margin-top: 4px; }
 
 .ativ-list { margin: 14px 16px 0; display: flex; flex-direction: column; gap: 8px; }
 
 .ativ-card {
-background: var(–surface);
-border-radius: var(–radius-sm);
-padding: 16px;
-box-shadow: var(–shadow);
-display: flex; align-items: center; gap: 12px;
-animation: slideIn 0.2s ease;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 12px;
+  animation: slideIn 0.2s ease;
 }
 .ativ-icon-wrap {
-width: 44px; height: 44px;
-border-radius: 12px;
-display: flex; align-items: center; justify-content: center;
-font-size: 22px; flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
 }
 .ativ-body { flex: 1; }
-.ativ-nome { font-family: ‘Outfit’, sans-serif; font-size: 16px; font-weight: 600; color: var(–text); }
-.ativ-metricas { font-size: 12px; color: var(–text2); margin-top: 2px; }
+.ativ-nome { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); }
+.ativ-metricas { font-size: 12px; color: var(--text2); margin-top: 2px; }
 .ativ-actions { display: flex; gap: 4px; }
 .ativ-action-btn {
-background: none; border: none;
-width: 32px; height: 32px;
-border-radius: 8px; font-size: 15px;
-cursor: pointer; color: var(–text3);
-transition: all 0.15s;
-display: flex; align-items: center; justify-content: center;
+  background: none; border: none;
+  width: 32px; height: 32px;
+  border-radius: 8px; font-size: 15px;
+  cursor: pointer; color: var(--text3);
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
 }
-.ativ-action-btn:hover { background: var(–surface2); color: var(–text); }
-.ativ-action-btn.del:hover { background: var(–bad-dim); color: var(–bad); }
+.ativ-action-btn:hover { background: var(--surface2); color: var(--text); }
+.ativ-action-btn.del:hover { background: var(--bad-dim); color: var(--bad); }
 
 .ativ-empty {
-margin: 40px 16px;
-text-align: center;
-color: var(–text3);
+  margin: 40px 16px;
+  text-align: center;
+  color: var(--text3);
 }
 .ativ-empty-icon { font-size: 44px; margin-bottom: 12px; }
-.ativ-empty-text { font-size: 15px; margin-bottom: 4px; color: var(–text2); }
+.ativ-empty-text { font-size: 15px; margin-bottom: 4px; color: var(--text2); }
 .ativ-empty-sub  { font-size: 13px; }
 
 /* ── CONFIGS ── */
 .cfg-header {
-padding: 52px 20px 16px;
-background: var(–surface);
+  padding: 52px 20px 16px;
+  background: var(--surface);
 }
-.cfg-title { font-family: ‘Outfit’, sans-serif; font-size: 26px; font-weight: 700; color: var(–text); }
+.cfg-title { font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: var(--text); }
 
 .cfg-section { margin: 14px 16px 0; }
 .cfg-section-title {
-font-family: ‘Outfit’, sans-serif;
-font-size: 12px; font-weight: 600;
-color: var(–text3); text-transform: uppercase;
-letter-spacing: 0.1em; margin-bottom: 10px; padding: 0 2px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 10px; padding: 0 2px;
 }
 
 .theme-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
 .theme-btn {
-aspect-ratio: 1;
-border-radius: 12px;
-border: 2.5px solid transparent;
-cursor: pointer;
-transition: all 0.2s;
-position: relative;
-display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
 }
-.theme-btn.active { border-color: var(–text); }
+.theme-btn.active { border-color: var(--text); }
 .theme-btn.active::after {
-content: ‘✓’;
-color: #fff;
-font-size: 16px;
-font-weight: 700;
+  content: '✓';
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* ── MODAL ── */
 .modal-overlay {
-display: none;
-position: fixed; inset: 0;
-background: rgba(0,0,0,0.4);
-z-index: 200;
-align-items: flex-end;
-justify-content: center;
-backdrop-filter: blur(2px);
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(2px);
 }
 .modal-overlay.open { display: flex; }
 
 .modal {
-background: var(–surface);
-border-radius: 24px 24px 0 0;
-width: 100%; max-width: 430px;
-max-height: 90vh;
-overflow-y: auto;
-padding: 8px 20px 40px;
-animation: slideUp 0.3s cubic-bezier(0.34,1.2,0.64,1);
+  background: var(--surface);
+  border-radius: 24px 24px 0 0;
+  width: 100%; max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 8px 20px 40px;
+  animation: slideUp 0.3s cubic-bezier(0.34,1.2,0.64,1);
 }
 @keyframes slideUp {
-from { transform: translateY(100%); }
-to   { transform: translateY(0); }
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
 }
 
 .modal-handle {
-width: 40px; height: 4px;
-background: var(–border);
-border-radius: 2px;
-margin: 10px auto 20px;
+  width: 40px; height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 10px auto 20px;
 }
 
 .modal-title {
-font-family: ‘Outfit’, sans-serif;
-font-size: 20px; font-weight: 700;
-color: var(–text); margin-bottom: 20px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--text); margin-bottom: 20px;
 }
 
 /* ── FORM ── */
 .field { margin-bottom: 16px; }
 .field label {
-display: block; font-size: 12px; font-weight: 600;
-color: var(–text2); margin-bottom: 7px;
-text-transform: uppercase; letter-spacing: 0.06em;
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--text2); margin-bottom: 7px;
+  text-transform: uppercase; letter-spacing: 0.06em;
 }
 
-input[type=“text”], input[type=“number”], input[type=“date”], select, textarea {
-width: 100%;
-background: var(–surface2);
-border: 1.5px solid var(–border);
-border-radius: var(–radius-sm);
-color: var(–text);
-font-family: ‘Plus Jakarta Sans’, sans-serif;
-font-size: 15px; font-weight: 500;
-padding: 12px 14px;
-outline: none;
-transition: border-color 0.18s;
-appearance: none;
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
+  width: 100%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.18s;
+  appearance: none;
 }
-input:focus, select:focus, textarea:focus { border-color: var(–accent); }
-input::placeholder, textarea::placeholder { color: var(–text3); font-weight: 400; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+input::placeholder, textarea::placeholder { color: var(--text3); font-weight: 400; }
 textarea { resize: none; min-height: 72px; }
 
 .select-wrap { position: relative; }
 .select-wrap::after {
-content: ‘▾’;
-position: absolute; right: 14px; top: 50%;
-transform: translateY(-50%);
-color: var(–text3); pointer-events: none; font-size: 12px;
+  content: '▾';
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3); pointer-events: none; font-size: 12px;
 }
 
 /* Opções de toggle */
 .toggle-group { display: flex; flex-wrap: wrap; gap: 8px; }
 .toggle-opt {
-padding: 8px 14px;
-border-radius: 20px;
-border: 1.5px solid var(–border);
-background: var(–surface2);
-color: var(–text2);
-font-size: 13px; font-weight: 500;
-cursor: pointer; transition: all 0.15s;
-font-family: ‘Plus Jakarta Sans’, sans-serif;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
-.toggle-opt.selected { background: var(–accent-dim); border-color: var(–accent); color: var(–accent-text); font-weight: 600; }
+.toggle-opt.selected { background: var(--accent-dim); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
 
 /* Emoji picker */
 .emoji-grid {
-display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
 }
 .emoji-opt {
-aspect-ratio: 1; border-radius: 10px;
-border: 1.5px solid var(–border);
-background: var(–surface2);
-font-size: 20px; cursor: pointer;
-transition: all 0.15s;
-display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1; border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  font-size: 20px; cursor: pointer;
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
 }
-.emoji-opt.selected { border-color: var(–accent); background: var(–accent-dim); }
+.emoji-opt.selected { border-color: var(--accent); background: var(--accent-dim); }
 
 /* Color picker */
 .color-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
 .color-opt {
-aspect-ratio: 1;
-border-radius: 8px;
-border: 2.5px solid transparent;
-cursor: pointer; transition: all 0.15s;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  border: 2.5px solid transparent;
+  cursor: pointer; transition: all 0.15s;
 }
-.color-opt.selected { border-color: var(–text); transform: scale(1.1); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.color-opt.selected { border-color: var(--text); transform: scale(1.1); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
 /* Tags de tipo */
 .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag-item {
-display: flex; align-items: center; gap: 4px;
-padding: 6px 10px;
-background: var(–accent-dim);
-border: 1.5px solid var(–accent);
-border-radius: 20px;
-font-size: 12px; font-weight: 600; color: var(–accent-text);
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px 10px;
+  background: var(--accent-dim);
+  border: 1.5px solid var(--accent);
+  border-radius: 20px;
+  font-size: 12px; font-weight: 600; color: var(--accent-text);
 }
 .tag-remove {
-background: none; border: none; cursor: pointer;
-color: var(–accent-text); font-size: 14px; line-height: 1;
-padding: 0; margin-left: 2px;
+  background: none; border: none; cursor: pointer;
+  color: var(--accent-text); font-size: 14px; line-height: 1;
+  padding: 0; margin-left: 2px;
 }
 .tag-add-wrap { display: flex; gap: 6px; margin-top: 8px; }
 .tag-add-wrap input { flex: 1; }
 .tag-add-btn {
-padding: 12px 16px;
-border-radius: var(–radius-sm);
-background: var(–accent);
-color: #fff; border: none;
-font-family: ‘Outfit’, sans-serif;
-font-size: 14px; font-weight: 600;
-cursor: pointer; white-space: nowrap;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff; border: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
 }
 
 /* Intensidade */
 .intensidade-opts { display: flex; gap: 8px; }
 .intens-btn {
-flex: 1; padding: 10px 4px;
-border-radius: var(–radius-sm);
-border: 1.5px solid var(–border);
-background: var(–surface2);
-font-family: ‘Plus Jakarta Sans’, sans-serif;
-font-size: 13px; font-weight: 500;
-cursor: pointer; text-align: center;
-transition: all 0.15s; color: var(–text2);
+  flex: 1; padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; text-align: center;
+  transition: all 0.15s; color: var(--text2);
 }
 .intens-btn.selected.leve   { background: rgba(16,185,129,0.12); border-color: #10b981; color: #047857; }
 .intens-btn.selected.medio  { background: rgba(249,115,22,0.12); border-color: #f97316; color: #c2410c; }
@@ -815,67 +814,66 @@ transition: all 0.15s; color: var(–text2);
 /* Humor */
 .humor-opts { display: flex; gap: 8px; justify-content: space-between; }
 .humor-btn {
-flex: 1; padding: 10px 4px;
-border-radius: var(–radius-sm);
-border: 1.5px solid var(–border);
-background: var(–surface2);
-font-size: 20px; cursor: pointer;
-text-align: center; transition: all 0.15s;
+  flex: 1; padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  font-size: 20px; cursor: pointer;
+  text-align: center; transition: all 0.15s;
 }
-.humor-btn.selected { border-color: var(–accent); background: var(–accent-dim); }
+.humor-btn.selected { border-color: var(--accent); background: var(--accent-dim); }
 
 /* Btns */
 .btn-primary {
-width: 100%; padding: 15px;
-border-radius: var(–radius-sm);
-background: var(–accent); color: #fff;
-font-family: ‘Outfit’, sans-serif;
-font-size: 16px; font-weight: 700;
-border: none; cursor: pointer;
-transition: all 0.18s; margin-top: 8px;
+  width: 100%; padding: 15px;
+  border-radius: var(--radius-sm);
+  background: var(--accent); color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px; font-weight: 700;
+  border: none; cursor: pointer;
+  transition: all 0.18s; margin-top: 8px;
 }
 .btn-primary:active { transform: scale(0.98); }
 .btn-secondary {
-width: 100%; padding: 13px;
-border-radius: var(–radius-sm);
-background: var(–surface2);
-border: 1.5px solid var(–border);
-color: var(–text2);
-font-family: ‘Outfit’, sans-serif;
-font-size: 15px; font-weight: 500;
-cursor: pointer; margin-top: 8px; transition: all 0.15s;
+  width: 100%; padding: 13px;
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  color: var(--text2);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px; font-weight: 500;
+  cursor: pointer; margin-top: 8px; transition: all 0.15s;
 }
 
 /* Divider */
-.divider { height: 1px; background: var(–border); margin: 16px 0; }
+.divider { height: 1px; background: var(--border); margin: 16px 0; }
 
 /* Streak */
 .streak-bar {
-margin: 14px 16px 0;
-background: var(–surface);
-border-radius: var(–radius);
-padding: 16px;
-box-shadow: var(–shadow);
-display: flex; align-items: center; gap: 14px;
+  margin: 14px 16px 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 14px;
 }
 .streak-num {
-font-family: ‘Outfit’, sans-serif;
-font-size: 36px; font-weight: 800;
-color: var(–accent); line-height: 1;
+  font-family: 'Outfit', sans-serif;
+  font-size: 36px; font-weight: 800;
+  color: var(--accent); line-height: 1;
 }
 .streak-body { flex: 1; }
-.streak-label { font-size: 13px; font-weight: 600; color: var(–text); }
-.streak-sub   { font-size: 11px; color: var(–text2); margin-top: 2px; }
+.streak-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.streak-sub   { font-size: 11px; color: var(--text2); margin-top: 2px; }
 .streak-icon  { font-size: 28px; }
 </style>
 
 <!-- Firebase -->
-
 <script type="module">
   import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
                               from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, collection, doc, addDoc, getDocs, setDoc, deleteDoc, query, orderBy, writeBatch }
+  import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc, query, orderBy, writeBatch }
                               from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -887,16 +885,14 @@ color: var(–accent); line-height: 1;
     appId:             "1:619852232899:web:917e37be07ae65bd714a76"
   };
 
-  const app      = initializeApp(firebaseConfig);
-  const auth     = getAuth(app);
-  const db       = getFirestore(app);
-  const provider = new GoogleAuthProvider();
+  const fbApp  = initializeApp(firebaseConfig);
+  const auth   = getAuth(fbApp);
+  const db     = getFirestore(fbApp);
+  const prov   = new GoogleAuthProvider();
 
-  // ── Refs ────────────────────────────────────────────
-  function ativRef(uid)  { return collection(db, "usuarios", uid, "tracker_atividades"); }
-  function regRef(uid)   { return collection(db, "usuarios", uid, "tracker_registros"); }
+  function ativRef(uid) { return collection(db, "usuarios", uid, "tracker_atividades"); }
+  function regRef(uid)  { return collection(db, "usuarios", uid, "tracker_registros");  }
 
-  // ── Firestore ops ───────────────────────────────────
   async function fsCarregarAtividades(uid) {
     const snap = await getDocs(ativRef(uid));
     return snap.docs.map(d => ({ ...d.data(), id: d.id }));
@@ -927,49 +923,16 @@ color: var(–accent); line-height: 1;
     await batch.commit();
   }
 
-  // ── Expõe globalmente ────────────────────────────────
   window._fb = {
-    auth, provider, signInWithPopup, signOut,
+    auth, prov, signInWithPopup, signOut,
     currentUser: null,
     fsCarregarAtividades, fsCarregarRegistros,
     fsSalvarAtividade, fsDeletarAtividade,
     fsSalvarRegistro, fsDeletarRegistro, fsLimparTudo,
   };
 
-  // ── Callbacks de autenticação ────────────────────────
-  // Definidos aqui dentro do module para garantir que estão prontos
-  // quando o onAuthStateChanged disparar
-
-  function appOnLogin(user, ativs, regs) {
-    // Atualiza variáveis globais do script principal
-    window._appData = { atividades: ativs, registros: regs };
-
-    const wrap = document.getElementById('userAvatarWrap');
-    if (user.photoURL) {
-      wrap.innerHTML = `<img class="user-avatar" src="${user.photoURL}" referrerpolicy="no-referrer">`;
-    } else {
-      const ini = (user.displayName || user.email || '?')[0].toUpperCase();
-      wrap.innerHTML = `<div class="user-avatar-ph">${ini}</div>`;
-    }
-    document.getElementById('userDisplayName').textContent = user.displayName || user.email;
-    document.getElementById('loginScreen').style.display    = 'none';
-    document.getElementById('loadingOverlay').style.display = 'none';
-    document.getElementById('app').style.display            = 'flex';
-
-    // Chama init do script principal via evento
-    window.dispatchEvent(new CustomEvent('app:login', { detail: { user, ativs, regs } }));
-  }
-
-  function appOnLogout() {
-    window._appData = { atividades: [], registros: [] };
-    document.getElementById('app').style.display            = 'none';
-    document.getElementById('loadingOverlay').style.display = 'none';
-    document.getElementById('loginScreen').style.display    = 'flex';
-    window.dispatchEvent(new CustomEvent('app:logout'));
-  }
-
-  // ── Auth state ───────────────────────────────────────
   onAuthStateChanged(auth, async (user) => {
+    console.log('auth state:', user ? user.email : 'null');
     window._fb.currentUser = user;
     if (user) {
       try {
@@ -977,24 +940,21 @@ color: var(–accent); line-height: 1;
           fsCarregarAtividades(user.uid),
           fsCarregarRegistros(user.uid),
         ]);
-        console.log(`Firestore: ${ativs.length} atividades, ${regs.length} registros`);
-        appOnLogin(user, ativs, regs);
+        console.log('carregou:', ativs.length, 'atividades,', regs.length, 'registros');
+        window._fbOnLogin(user, ativs, regs);
       } catch(e) {
-        console.error('Erro ao carregar dados:', e);
-        // Em caso de erro, entra sem dados mas não trava
-        appOnLogin(user, [], []);
+        console.error('erro firestore:', e);
+        window._fbOnLogin(user, [], []);
       }
     } else {
-      appOnLogout();
+      window._fbOnLogout();
     }
   });
 </script>
-
 </head>
 <body>
 
 <!-- ══ LOGIN ══ -->
-
 <div id="loginScreen">
   <div class="login-blob"></div>
   <div class="login-content">
@@ -1038,7 +998,6 @@ color: var(–accent); line-height: 1;
 </div>
 
 <!-- ══ LOADING ══ -->
-
 <div id="loadingOverlay" style="display:none">
   <div class="loading-spinner"></div>
   <div class="loading-text">Carregando seus dados…</div>
@@ -1047,7 +1006,6 @@ color: var(–accent); line-height: 1;
 <div id="app" style="display:none">
 
   <!-- ══ HOME ══ -->
-
   <div class="screen active" id="screen-home">
     <div class="user-topbar">
       <div id="userAvatarWrap"></div>
@@ -1059,96 +1017,88 @@ color: var(–accent); line-height: 1;
       <div class="home-title">Como foi seu <span>dia</span>?</div>
     </div>
 
-```
-<!-- Streak -->
-<div class="streak-bar" id="streakBar">
-  <div class="streak-num" id="streakNum">0</div>
-  <div class="streak-body">
-    <div class="streak-label">dias seguidos</div>
-    <div class="streak-sub" id="streakSub">Registre sua primeira atividade!</div>
-  </div>
-  <div class="streak-icon">🔥</div>
-</div>
-
-<!-- Hoje -->
-<div class="today-section">
-  <div class="section-title" id="todayLabel">Hoje</div>
-  <div id="todayList"></div>
-</div>
-
-<!-- Calendário -->
-<div class="cal-wrap">
-  <div class="cal-header">
-    <div class="cal-month" id="calMonth">Março 2025</div>
-    <div class="cal-nav">
-      <button onclick="navCal(-1)">‹</button>
-      <button onclick="navCal(1)">›</button>
+    <!-- Streak -->
+    <div class="streak-bar" id="streakBar">
+      <div class="streak-num" id="streakNum">0</div>
+      <div class="streak-body">
+        <div class="streak-label">dias seguidos</div>
+        <div class="streak-sub" id="streakSub">Registre sua primeira atividade!</div>
+      </div>
+      <div class="streak-icon">🔥</div>
     </div>
-  </div>
-  <div class="cal-weekdays">
-    <div class="cal-weekday">D</div><div class="cal-weekday">S</div>
-    <div class="cal-weekday">T</div><div class="cal-weekday">Q</div>
-    <div class="cal-weekday">Q</div><div class="cal-weekday">S</div>
-    <div class="cal-weekday">S</div>
-  </div>
-  <div class="cal-days" id="calDays"></div>
-</div>
-```
 
+    <!-- Hoje -->
+    <div class="today-section">
+      <div class="section-title" id="todayLabel">Hoje</div>
+      <div id="todayList"></div>
+    </div>
+
+    <!-- Calendário -->
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <div class="cal-month" id="calMonth">Março 2025</div>
+        <div class="cal-nav">
+          <button onclick="navCal(-1)">‹</button>
+          <button onclick="navCal(1)">›</button>
+        </div>
+      </div>
+      <div class="cal-weekdays">
+        <div class="cal-weekday">D</div><div class="cal-weekday">S</div>
+        <div class="cal-weekday">T</div><div class="cal-weekday">Q</div>
+        <div class="cal-weekday">Q</div><div class="cal-weekday">S</div>
+        <div class="cal-weekday">S</div>
+      </div>
+      <div class="cal-days" id="calDays"></div>
+    </div>
   </div>
 
   <!-- ══ RESUMO ══ -->
-
   <div class="screen" id="screen-hist">
     <div class="hist-header">
       <div class="hist-title">Resumo</div>
     </div>
 
-```
-<!-- Filtro período -->
-<div style="margin:14px 16px 0">
-  <div class="cfg-section-title" style="margin-bottom:10px">Período</div>
-  <div class="toggle-group" id="periodoOpts" style="margin-bottom:10px"></div>
-  <div id="periodoCustom" style="display:none;gap:8px;margin-top:8px">
-    <div style="display:flex;gap:8px">
-      <div class="field" style="flex:1;margin-bottom:0">
-        <label>De</label>
-        <input type="date" id="filtroDataDe" oninput="renderResumo()">
-      </div>
-      <div class="field" style="flex:1;margin-bottom:0">
-        <label>Até</label>
-        <input type="date" id="filtroDataAte" oninput="renderResumo()">
+    <!-- Filtro período -->
+    <div style="margin:14px 16px 0">
+      <div class="cfg-section-title" style="margin-bottom:10px">Período</div>
+      <div class="toggle-group" id="periodoOpts" style="margin-bottom:10px"></div>
+      <div id="periodoCustom" style="display:none;gap:8px;margin-top:8px">
+        <div style="display:flex;gap:8px">
+          <div class="field" style="flex:1;margin-bottom:0">
+            <label>De</label>
+            <input type="date" id="filtroDataDe" oninput="renderResumo()">
+          </div>
+          <div class="field" style="flex:1;margin-bottom:0">
+            <label>Até</label>
+            <input type="date" id="filtroDataAte" oninput="renderResumo()">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Filtro atividade -->
-<div style="margin:14px 16px 0">
-  <div class="cfg-section-title" style="margin-bottom:10px">Atividade</div>
-  <div class="hist-filters" id="histFilters"></div>
-</div>
+    <!-- Filtro atividade -->
+    <div style="margin:14px 16px 0">
+      <div class="cfg-section-title" style="margin-bottom:10px">Atividade</div>
+      <div class="hist-filters" id="histFilters"></div>
+    </div>
 
-<!-- Filtro modalidade (aparece só quando atividade selecionada) -->
-<div id="modalidadeFiltroWrap" style="display:none;margin:14px 16px 0">
-  <div class="cfg-section-title" style="margin-bottom:10px">Modalidade</div>
-  <div class="hist-filters" id="modalidadeFiltroOpts"></div>
-</div>
+    <!-- Filtro modalidade (aparece só quando atividade selecionada) -->
+    <div id="modalidadeFiltroWrap" style="display:none;margin:14px 16px 0">
+      <div class="cfg-section-title" style="margin-bottom:10px">Modalidade</div>
+      <div class="hist-filters" id="modalidadeFiltroOpts"></div>
+    </div>
 
-<!-- Totais -->
-<div class="hist-totais" id="histTotais"></div>
+    <!-- Totais -->
+    <div class="hist-totais" id="histTotais"></div>
 
-<!-- Export -->
-<button class="hist-export-btn" onclick="exportCSV()">⬇️ Exportar CSV</button>
+    <!-- Export -->
+    <button class="hist-export-btn" onclick="exportCSV()">⬇️ Exportar CSV</button>
 
-<!-- Lista -->
-<div class="hist-list" id="histList"></div>
-```
-
+    <!-- Lista -->
+    <div class="hist-list" id="histList"></div>
   </div>
 
   <!-- ══ ATIVIDADES ══ -->
-
   <div class="screen" id="screen-ativ">
     <div class="ativ-header">
       <div class="ativ-title">Atividades</div>
@@ -1158,7 +1108,6 @@ color: var(–accent); line-height: 1;
   </div>
 
   <!-- ══ DETALHE ATIVIDADE ══ -->
-
   <div class="screen" id="screen-ativ-detail">
     <div class="ativ-header" style="padding-bottom:0">
       <button onclick="voltarAtividades()" style="background:none;border:none;color:var(--accent);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;padding:0;margin-bottom:12px">‹ Voltar</button>
@@ -1182,7 +1131,6 @@ color: var(–accent); line-height: 1;
   </div>
 
   <!-- ══ CONFIGURAÇÕES ══ -->
-
   <div class="screen" id="screen-cfg">
     <div class="cfg-header">
       <div class="cfg-title">Configurações</div>
@@ -1192,24 +1140,20 @@ color: var(–accent); line-height: 1;
       <div class="theme-grid" id="themeGrid"></div>
     </div>
 
-```
-<div class="cfg-section" style="margin-top:28px">
-  <div class="cfg-section-title">Dados</div>
-  <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px">
-    <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Resetar todos os dados</div>
-    <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.5">Remove todas as atividades e registros da sua conta. Essa ação não pode ser desfeita.</div>
-    <button onclick="confirmarReset()" style="width:100%;padding:12px;border-radius:var(--radius-sm);background:none;border:1.5px solid var(--bad);color:var(--bad);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s"
-      onmouseover="this.style.background='var(--bad-dim)'" onmouseout="this.style.background='none'">
-      🗑 Apagar todos os dados
-    </button>
-  </div>
-</div>
-```
-
+    <div class="cfg-section" style="margin-top:28px">
+      <div class="cfg-section-title">Dados</div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px">
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Resetar todos os dados</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.5">Remove todas as atividades e registros da sua conta. Essa ação não pode ser desfeita.</div>
+        <button onclick="confirmarReset()" style="width:100%;padding:12px;border-radius:var(--radius-sm);background:none;border:1.5px solid var(--bad);color:var(--bad);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s"
+          onmouseover="this.style.background='var(--bad-dim)'" onmouseout="this.style.background='none'">
+          🗑 Apagar todos os dados
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- ══ BOTTOM NAV ══ -->
-
   <nav class="bottom-nav">
     <button class="nav-btn active" onclick="goScreen('home',this)">
       <span class="nav-icon">🏠</span>Início
@@ -1227,38 +1171,32 @@ color: var(–accent); line-height: 1;
 </div>
 
 <!-- FAB -->
-
 <button class="fab" id="fabBtn" title="Registrar atividade">＋</button>
 
 <!-- ══ MODAL REGISTRAR ══ -->
-
 <div class="modal-overlay" id="modalRegistro">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-title" id="modalRegistroTitle">Registrar atividade</div>
 
-```
-<div class="field">
-  <label>Data</label>
-  <input type="date" id="regData">
-</div>
+    <div class="field">
+      <label>Data</label>
+      <input type="date" id="regData">
+    </div>
 
-<div class="field">
-  <label>Atividade</label>
-  <div class="toggle-group" id="regAtivOpts"></div>
-</div>
+    <div class="field">
+      <label>Atividade</label>
+      <div class="toggle-group" id="regAtivOpts"></div>
+    </div>
 
-<div id="regMetricas"></div>
+    <div id="regMetricas"></div>
 
-<button class="btn-primary" onclick="salvarRegistro()">Salvar</button>
-<button class="btn-secondary" onclick="fecharModal('modalRegistro')">Cancelar</button>
-```
-
+    <button class="btn-primary" onclick="salvarRegistro()">Salvar</button>
+    <button class="btn-secondary" onclick="fecharModal('modalRegistro')">Cancelar</button>
   </div>
 </div>
 
 <!-- ══ MODAL VER DIA ══ -->
-
 <div class="modal-overlay" id="modalDia">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -1270,60 +1208,56 @@ color: var(–accent); line-height: 1;
 </div>
 
 <!-- ══ MODAL NOVA ATIVIDADE ══ -->
-
 <div class="modal-overlay" id="modalAtiv">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-title" id="modalAtivTitle">Nova atividade</div>
 
-```
-<div class="field">
-  <label>Nome</label>
-  <input type="text" id="ativNome" placeholder="Ex: Corrida, Yoga, Academia…">
-</div>
-
-<div class="field">
-  <label>Ícone</label>
-  <div class="emoji-grid" id="ativEmojiGrid"></div>
-</div>
-
-<div class="field">
-  <label>Cor</label>
-  <div class="color-grid" id="ativColorGrid"></div>
-</div>
-
-<div class="field">
-  <label>Métricas disponíveis</label>
-  <div class="toggle-group" id="ativMetricasOpts"></div>
-</div>
-
-<div class="field" id="ativTiposField">
-  <label>Tipos / Modalidades (opcional)</label>
-  <div class="tags-wrap" id="ativTiposWrap"></div>
-  <div class="tag-add-wrap">
-    <input type="text" id="ativTipoInput" placeholder="Ex: Rua, Esteira, Prova…">
-    <button class="tag-add-btn" onclick="addTipo()">+ Add</button>
-  </div>
-</div>
-
-<div class="field">
-  <label>Meta de treinos</label>
-  <div style="display:flex;gap:8px;align-items:center">
-    <input type="number" id="ativMetaQtd" placeholder="Ex: 250" min="1" style="flex:1">
-    <div class="select-wrap" style="flex:1">
-      <select id="ativMetaTipo">
-        <option value="">Sem meta</option>
-        <option value="anual">por ano</option>
-        <option value="mensal">por mês</option>
-      </select>
+    <div class="field">
+      <label>Nome</label>
+      <input type="text" id="ativNome" placeholder="Ex: Corrida, Yoga, Academia…">
     </div>
-  </div>
-</div>
 
-<button class="btn-primary" onclick="salvarAtividade()">Salvar atividade</button>
-<button class="btn-secondary" onclick="fecharModal('modalAtiv')">Cancelar</button>
-```
+    <div class="field">
+      <label>Ícone</label>
+      <div class="emoji-grid" id="ativEmojiGrid"></div>
+    </div>
 
+    <div class="field">
+      <label>Cor</label>
+      <div class="color-grid" id="ativColorGrid"></div>
+    </div>
+
+    <div class="field">
+      <label>Métricas disponíveis</label>
+      <div class="toggle-group" id="ativMetricasOpts"></div>
+    </div>
+
+    <div class="field" id="ativTiposField">
+      <label>Tipos / Modalidades (opcional)</label>
+      <div class="tags-wrap" id="ativTiposWrap"></div>
+      <div class="tag-add-wrap">
+        <input type="text" id="ativTipoInput" placeholder="Ex: Rua, Esteira, Prova…">
+        <button class="tag-add-btn" onclick="addTipo()">+ Add</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Meta de treinos</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="number" id="ativMetaQtd" placeholder="Ex: 250" min="1" style="flex:1">
+        <div class="select-wrap" style="flex:1">
+          <select id="ativMetaTipo">
+            <option value="">Sem meta</option>
+            <option value="anual">por ano</option>
+            <option value="mensal">por mês</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="salvarAtividade()">Salvar atividade</button>
+    <button class="btn-secondary" onclick="fecharModal('modalAtiv')">Cancelar</button>
   </div>
 </div>
 
@@ -1385,24 +1319,36 @@ let _regAtivSel  = null;
 let _regMetricas = {};
 
 // ── CALLBACKS FIREBASE ──────────────────────────────
-// ── Eventos de autenticação ─────────────────────────
-// Escuta eventos disparados pelo module Firebase
-window.addEventListener('app:login', function(e) {
-  const { ativs, regs } = e.detail;
+// ── Auth callbacks ──────────────────────────────────
+window._fbOnLogin = function(user, ativs, regs) {
   atividades = ativs;
   registros  = regs;
+
+  const wrap = document.getElementById('userAvatarWrap');
+  if (user.photoURL) {
+    wrap.innerHTML = `<img class="user-avatar" src="${user.photoURL}" referrerpolicy="no-referrer">`;
+  } else {
+    const ini = (user.displayName || user.email || '?')[0].toUpperCase();
+    wrap.innerHTML = `<div class="user-avatar-ph">${ini}</div>`;
+  }
+  document.getElementById('userDisplayName').textContent = user.displayName || user.email;
+  document.getElementById('loginScreen').style.display    = 'none';
+  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById('app').style.display            = 'flex';
   aplicarTema(tema);
   init();
-});
+};
 
-window.addEventListener('app:logout', function() {
-  atividades = [];
-  registros  = [];
-});
+window._fbOnLogout = function() {
+  atividades = []; registros = [];
+  document.getElementById('app').style.display            = 'none';
+  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById('loginScreen').style.display    = 'flex';
+};
 
 function fazerLogin() {
   if (!window._fb) { setTimeout(fazerLogin, 100); return; }
-  window._fb.signInWithPopup(window._fb.auth, window._fb.provider)
+  window._fb.signInWithPopup(window._fb.auth, window._fb.prov)
     .catch(e => { console.error(e); alert('Erro ao fazer login. Tente novamente.'); });
 }
 
@@ -1817,585 +1763,648 @@ function renderRegMetricas() {
   html += `<div class="field"><label>Comentários (opcional)</label>
     <textarea id="rm_nota" placeholder="Como foi o treino? Alguma observação?"
       oninput="_regMetricas.nota=this.value">${_regMetricas.nota||''}</textarea>
-
   </div>`;
 
-wrap.innerHTML = html;
+  wrap.innerHTML = html;
 }
 
 function selIntens(v) {
-_regMetricas.intensidade = v;
-renderRegMetricas();
+  _regMetricas.intensidade = v;
+  renderRegMetricas();
 }
 function selHumor(v) {
-_regMetricas.humor = v;
-renderRegMetricas();
+  _regMetricas.humor = v;
+  renderRegMetricas();
 }
 
 function salvarRegistro() {
-if (!_regAtivSel) { alert(‘Selecione uma atividade.’); return; }
-const data = document.getElementById(‘regData’).value;
-if (!data) { alert(‘Selecione uma data.’); return; }
+  if (!_regAtivSel) { alert('Selecione uma atividade.'); return; }
+  const data = document.getElementById('regData').value;
+  if (!data) { alert('Selecione uma data.'); return; }
 
-const reg = {
-id:          _regEdit || Date.now().toString(),
-atividadeId: _regAtivSel,
-data,
-…_regMetricas,
-};
+  const reg = {
+    id:          _regEdit || Date.now().toString(),
+    atividadeId: _regAtivSel,
+    data,
+    ..._regMetricas,
+  };
 
-if (_regEdit) {
-registros = registros.map(r => r.id === _regEdit ? reg : r);
-} else {
-registros.unshift(reg);
-}
+  if (_regEdit) {
+    registros = registros.map(r => r.id === _regEdit ? reg : r);
+  } else {
+    registros.unshift(reg);
+  }
 
-salvarRegFirestore(reg);
-fecharModal(‘modalRegistro’);
-renderToday();
-renderCalendario();
-renderGreeting();
+  salvarRegFirestore(reg);
+  fecharModal('modalRegistro');
+  renderToday();
+  renderCalendario();
+  renderGreeting();
 }
 
 function deletarRegistro(id) {
-if (!confirm(‘Deletar este registro?’)) return;
-registros = registros.filter(r => r.id !== id);
-deletarRegFirestore(id);
-fecharModal(‘modalDia’);
-renderToday();
-renderCalendario();
-renderGreeting();
+  if (!confirm('Deletar este registro?')) return;
+  registros = registros.filter(r => r.id !== id);
+  deletarRegFirestore(id);
+  fecharModal('modalDia');
+  renderToday();
+  renderCalendario();
+  renderGreeting();
 }
 
 // ── MODAL NOVA ATIVIDADE ─────────────────────────────
 function abrirModalAtividade(id) {
-_ativEdit = id || null;
+  _ativEdit = id || null;
 
-if (id) {
-const a = atividades.find(a => a.id === id);
-document.getElementById(‘ativNome’).value = a.nome;
-_ativEmoji    = a.emoji;
-_ativCor      = a.cor;
-_ativMetricas = […a.metricas];
-_ativTipos    = […(a.tipos||[])];
-document.getElementById(‘modalAtivTitle’).textContent = ‘Editar atividade’;
-// Metas
-setTimeout(() => {
-document.getElementById(‘ativMetaQtd’).value  = a.metaQtd  || ‘’;
-document.getElementById(‘ativMetaTipo’).value = a.metaTipo || ‘’;
-}, 50);
-} else {
-document.getElementById(‘ativNome’).value = ‘’;
-_ativEmoji    = EMOJIS[0];
-_ativCor      = CORES_ATIV[5];
-_ativMetricas = [‘duracao’,‘intensidade’,‘humor’];
-_ativTipos    = [];
-document.getElementById(‘modalAtivTitle’).textContent = ‘Nova atividade’;
-setTimeout(() => {
-document.getElementById(‘ativMetaQtd’).value  = ‘’;
-document.getElementById(‘ativMetaTipo’).value = ‘’;
-}, 50);
-}
+  if (id) {
+    const a = atividades.find(a => a.id === id);
+    document.getElementById('ativNome').value = a.nome;
+    _ativEmoji    = a.emoji;
+    _ativCor      = a.cor;
+    _ativMetricas = [...a.metricas];
+    _ativTipos    = [...(a.tipos||[])];
+    document.getElementById('modalAtivTitle').textContent = 'Editar atividade';
+    // Metas
+    setTimeout(() => {
+      document.getElementById('ativMetaQtd').value  = a.metaQtd  || '';
+      document.getElementById('ativMetaTipo').value = a.metaTipo || '';
+    }, 50);
+  } else {
+    document.getElementById('ativNome').value = '';
+    _ativEmoji    = EMOJIS[0];
+    _ativCor      = CORES_ATIV[5];
+    _ativMetricas = ['duracao','intensidade','humor'];
+    _ativTipos    = [];
+    document.getElementById('modalAtivTitle').textContent = 'Nova atividade';
+    setTimeout(() => {
+      document.getElementById('ativMetaQtd').value  = '';
+      document.getElementById('ativMetaTipo').value = '';
+    }, 50);
+  }
 
-renderEmojiGrid();
-renderColorGrid();
-renderMetricasOpts();
-renderTiposTags();
-abrirModal(‘modalAtiv’);
+  renderEmojiGrid();
+  renderColorGrid();
+  renderMetricasOpts();
+  renderTiposTags();
+  abrirModal('modalAtiv');
 }
 
 function renderEmojiGrid() {
-document.getElementById(‘ativEmojiGrid’).innerHTML = EMOJIS.map(e => `<div class="emoji-opt${_ativEmoji===e?' selected':''}" onclick="selEmoji('${e}')">${e}</div>`).join(’’);
+  document.getElementById('ativEmojiGrid').innerHTML = EMOJIS.map(e => `
+    <div class="emoji-opt${_ativEmoji===e?' selected':''}" onclick="selEmoji('${e}')">${e}</div>
+  `).join('');
 }
 function selEmoji(e) { _ativEmoji = e; renderEmojiGrid(); }
 
 function renderColorGrid() {
-document.getElementById(‘ativColorGrid’).innerHTML = CORES_ATIV.map(c => `<div class="color-opt${_ativCor===c?' selected':''}" style="background:${c}" onclick="selCor('${c}')"></div>`).join(’’);
+  document.getElementById('ativColorGrid').innerHTML = CORES_ATIV.map(c => `
+    <div class="color-opt${_ativCor===c?' selected':''}"
+      style="background:${c}" onclick="selCor('${c}')"></div>
+  `).join('');
 }
 function selCor(c) { _ativCor = c; renderColorGrid(); }
 
 function renderMetricasOpts() {
-document.getElementById(‘ativMetricasOpts’).innerHTML =
-Object.entries(METRICAS_LABELS).map(([k,v]) => `<div class="toggle-opt${_ativMetricas.includes(k)?' selected':''}" onclick="toggleMetrica('${k}')">${v}</div>`).join(’’);
+  document.getElementById('ativMetricasOpts').innerHTML =
+    Object.entries(METRICAS_LABELS).map(([k,v]) => `
+      <div class="toggle-opt${_ativMetricas.includes(k)?' selected':''}"
+        onclick="toggleMetrica('${k}')">${v}</div>
+    `).join('');
 }
 function toggleMetrica(k) {
-_ativMetricas = _ativMetricas.includes(k)
-? _ativMetricas.filter(m => m !== k)
-: […_ativMetricas, k];
-renderMetricasOpts();
+  _ativMetricas = _ativMetricas.includes(k)
+    ? _ativMetricas.filter(m => m !== k)
+    : [..._ativMetricas, k];
+  renderMetricasOpts();
 }
 
 function renderTiposTags() {
-document.getElementById(‘ativTiposWrap’).innerHTML = _ativTipos.map(t => ` <div class="tag-item">${t} <button class="tag-remove" onclick="removeTipo('${t}')">×</button> </div>`).join(’’);
+  document.getElementById('ativTiposWrap').innerHTML = _ativTipos.map(t => `
+    <div class="tag-item">${t}
+      <button class="tag-remove" onclick="removeTipo('${t}')">×</button>
+    </div>`).join('');
 }
 function addTipo() {
-const inp = document.getElementById(‘ativTipoInput’);
-const v = inp.value.trim();
-if (v && !_ativTipos.includes(v)) { _ativTipos.push(v); renderTiposTags(); }
-inp.value = ‘’;
+  const inp = document.getElementById('ativTipoInput');
+  const v = inp.value.trim();
+  if (v && !_ativTipos.includes(v)) { _ativTipos.push(v); renderTiposTags(); }
+  inp.value = '';
 }
 function removeTipo(t) { _ativTipos = _ativTipos.filter(x => x !== t); renderTiposTags(); }
 
-document.getElementById(‘ativTipoInput’).addEventListener(‘keydown’, e => {
-if (e.key === ‘Enter’) { e.preventDefault(); addTipo(); }
+document.getElementById('ativTipoInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); addTipo(); }
 });
 
 function salvarAtividade() {
-const nome = document.getElementById(‘ativNome’).value.trim();
-if (!nome) { alert(‘Digite o nome da atividade.’); return; }
+  const nome = document.getElementById('ativNome').value.trim();
+  if (!nome) { alert('Digite o nome da atividade.'); return; }
 
-const metaQtd  = parseInt(document.getElementById(‘ativMetaQtd’).value) || 0;
-const metaTipo = document.getElementById(‘ativMetaTipo’).value;
-const ativ = {
-id:       _ativEdit || Date.now().toString(),
-nome, emoji: _ativEmoji, cor: _ativCor,
-metricas: _ativMetricas,
-tipos:    _ativTipos,
-metaQtd,
-metaTipo,
-};
+  const metaQtd  = parseInt(document.getElementById('ativMetaQtd').value) || 0;
+  const metaTipo = document.getElementById('ativMetaTipo').value;
+  const ativ = {
+    id:       _ativEdit || Date.now().toString(),
+    nome, emoji: _ativEmoji, cor: _ativCor,
+    metricas: _ativMetricas,
+    tipos:    _ativTipos,
+    metaQtd,
+    metaTipo,
+  };
 
-if (_ativEdit) {
-atividades = atividades.map(a => a.id === _ativEdit ? ativ : a);
-} else {
-atividades.push(ativ);
-}
+  if (_ativEdit) {
+    atividades = atividades.map(a => a.id === _ativEdit ? ativ : a);
+  } else {
+    atividades.push(ativ);
+  }
 
-salvarAtivFirestore(ativ).catch(e => console.error(‘Erro ao salvar atividade:’, e));
-fecharModal(‘modalAtiv’);
-renderAtividades();
-if (_detailAtivId === ativ.id) renderDetalheAtividade();
+  salvarAtivFirestore(ativ).catch(e => console.error('Erro ao salvar atividade:', e));
+  fecharModal('modalAtiv');
+  renderAtividades();
+  if (_detailAtivId === ativ.id) renderDetalheAtividade();
 }
 
 function abrirDetalheAtividade(id) {
-_detailAtivId  = id;
-_detailPeriodo = ‘ano’;
-renderDetalheAtividade();
-document.querySelectorAll(’.screen’).forEach(s => s.classList.remove(‘active’));
-document.getElementById(‘screen-ativ-detail’).classList.add(‘active’);
-document.querySelector(’.fab’).style.display = ‘none’;
+  _detailAtivId  = id;
+  _detailPeriodo = 'ano';
+  renderDetalheAtividade();
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-ativ-detail').classList.add('active');
+  document.querySelector('.fab').style.display = 'none';
 }
 
 function voltarAtividades() {
-document.querySelectorAll(’.screen’).forEach(s => s.classList.remove(‘active’));
-document.getElementById(‘screen-ativ’).classList.add(‘active’);
-document.querySelector(’.fab’).style.display = ‘flex’;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-ativ').classList.add('active');
+  document.querySelector('.fab').style.display = 'flex';
 }
 
 function renderDetalheAtividade() {
-const a = atividades.find(a => a.id === _detailAtivId);
-if (!a) return;
+  const a = atividades.find(a => a.id === _detailAtivId);
+  if (!a) return;
 
-// Header
-const iconEl = document.getElementById(‘detailIcon’);
-iconEl.textContent = a.emoji;
-iconEl.style.background = a.cor + ‘20’;
-document.getElementById(‘detailNome’).textContent = a.nome;
-document.getElementById(‘detailEditBtn’).onclick = () => abrirModalAtividade(a.id);
+  // Header
+  const iconEl = document.getElementById('detailIcon');
+  iconEl.textContent = a.emoji;
+  iconEl.style.background = a.cor + '20';
+  document.getElementById('detailNome').textContent = a.nome;
+  document.getElementById('detailEditBtn').onclick = () => abrirModalAtividade(a.id);
 
-// Totais rápidos
-const agora  = new Date();
-const anoStr = String(agora.getFullYear());
-const mesStr = anoStr + ‘-’ + String(agora.getMonth()+1).padStart(2,‘0’);
-const regsAno = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(anoStr));
-const regsMes = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(mesStr));
-const regsAll = registros.filter(r => r.atividadeId === a.id);
-document.getElementById(‘detailTotais’).innerHTML = ` <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsAll.length}</div><div class="total-chip-label">no total</div></div> <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsAno.length}</div><div class="total-chip-label">este ano</div></div> <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsMes.length}</div><div class="total-chip-label">este mês</div></div>`;
+  // Totais rápidos
+  const agora  = new Date();
+  const anoStr = String(agora.getFullYear());
+  const mesStr = anoStr + '-' + String(agora.getMonth()+1).padStart(2,'0');
+  const regsAno = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(anoStr));
+  const regsMes = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(mesStr));
+  const regsAll = registros.filter(r => r.atividadeId === a.id);
+  document.getElementById('detailTotais').innerHTML = `
+    <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsAll.length}</div><div class="total-chip-label">no total</div></div>
+    <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsAno.length}</div><div class="total-chip-label">este ano</div></div>
+    <div class="total-chip"><div class="total-chip-val" style="color:${a.cor}">${regsMes.length}</div><div class="total-chip-label">este mês</div></div>`;
 
-// Meta info
-if (a.metaQtd && a.metaTipo) {
-const base = a.metaTipo === ‘anual’ ? regsAno : regsMes;
-const pct  = Math.min(100, Math.round(base.length / a.metaQtd * 100));
-document.getElementById(‘detailMeta’).textContent = `Meta: ${base.length}/${a.metaQtd} ${a.metaTipo === 'anual' ? 'este ano' : 'este mês'}`;
-document.getElementById(‘detailProgressoWrap’).innerHTML = ` <div style="display:flex;justify-content:space-between;margin-bottom:4px"> <span style="font-size:11px;color:var(--text2)">Progresso da meta</span> <span style="font-size:11px;font-weight:700;color:${a.cor}">${pct}%</span> </div> <div style="height:6px;background:var(--surface3);border-radius:99px;overflow:hidden"> <div style="height:100%;width:${pct}%;background:${a.cor};border-radius:99px;transition:width 0.4s"></div> </div>`;
-} else {
-document.getElementById(‘detailMeta’).textContent = ‘’;
-document.getElementById(‘detailProgressoWrap’).innerHTML = ‘’;
-}
+  // Meta info
+  if (a.metaQtd && a.metaTipo) {
+    const base = a.metaTipo === 'anual' ? regsAno : regsMes;
+    const pct  = Math.min(100, Math.round(base.length / a.metaQtd * 100));
+    document.getElementById('detailMeta').textContent = `Meta: ${base.length}/${a.metaQtd} ${a.metaTipo === 'anual' ? 'este ano' : 'este mês'}`;
+    document.getElementById('detailProgressoWrap').innerHTML = `
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:11px;color:var(--text2)">Progresso da meta</span>
+        <span style="font-size:11px;font-weight:700;color:${a.cor}">${pct}%</span>
+      </div>
+      <div style="height:6px;background:var(--surface3);border-radius:99px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${a.cor};border-radius:99px;transition:width 0.4s"></div>
+      </div>`;
+  } else {
+    document.getElementById('detailMeta').textContent = '';
+    document.getElementById('detailProgressoWrap').innerHTML = '';
+  }
 
-// Período selector
-const periodos = [
-{ id: ‘mes’,  label: ‘Este mês’ },
-{ id: ‘ano’,  label: ‘Este ano’ },
-{ id: ‘tudo’, label: ‘Tudo’     },
-];
-document.getElementById(‘detailPeriodoOpts’).innerHTML = periodos.map(p => ` <div class="filter-chip${_detailPeriodo===p.id?' active':''}" onclick="_detailPeriodo='${p.id}'; renderDetalheAtividade()">${p.label}</div>`).join(’’);
+  // Período selector
+  const periodos = [
+    { id: 'mes',  label: 'Este mês' },
+    { id: 'ano',  label: 'Este ano' },
+    { id: 'tudo', label: 'Tudo'     },
+  ];
+  document.getElementById('detailPeriodoOpts').innerHTML = periodos.map(p => `
+    <div class="filter-chip${_detailPeriodo===p.id?' active':''}"
+      onclick="_detailPeriodo='${p.id}'; renderDetalheAtividade()">${p.label}</div>`).join('');
 
-// Lista registros filtrada
-let regsVis;
-if (_detailPeriodo === ‘mes’)  regsVis = regsMes;
-else if (_detailPeriodo === ‘ano’) regsVis = regsAno;
-else regsVis = regsAll;
-regsVis = […regsVis].sort((x,y) => y.data.localeCompare(x.data));
+  // Lista registros filtrada
+  let regsVis;
+  if (_detailPeriodo === 'mes')  regsVis = regsMes;
+  else if (_detailPeriodo === 'ano') regsVis = regsAno;
+  else regsVis = regsAll;
+  regsVis = [...regsVis].sort((x,y) => y.data.localeCompare(x.data));
 
-const listEl = document.getElementById(‘detailRegistrosList’);
-if (!regsVis.length) {
-listEl.innerHTML = ‘<div class="hist-empty"><div class="hist-empty-icon">📋</div>Nenhum registro neste período</div>’;
-return;
-}
+  const listEl = document.getElementById('detailRegistrosList');
+  if (!regsVis.length) {
+    listEl.innerHTML = '<div class="hist-empty"><div class="hist-empty-icon">📋</div>Nenhum registro neste período</div>';
+    return;
+  }
 
-const porData = {};
-regsVis.forEach(r => {
-if (!porData[r.data]) porData[r.data] = [];
-porData[r.data].push(r);
-});
+  const porData = {};
+  regsVis.forEach(r => {
+    if (!porData[r.data]) porData[r.data] = [];
+    porData[r.data].push(r);
+  });
 
-listEl.innerHTML = Object.entries(porData)
-.sort((x,y) => y[0].localeCompare(x[0]))
-.map(([data, regs]) => `<div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:4px 2px;margin-top:4px">${fmtData(data)}</div> ${regs.map(r =>`
-<div class="registro-card">
-<div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
-<div class="registro-body">
-<div class="registro-nome">${a.nome}${r.tipo ? ’ · <span style="font-size:11px;color:var(--text2)">’ + r.tipo + ‘</span>’ : ‘’}</div>
-<div class="registro-meta">${buildMeta(r, a)}</div>
-</div>
-<div class="registro-actions">
-<button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
-<button class="registro-action-btn del" onclick="deletarRegistroDetalhe('${r.id}')">🗑</button>
-</div>
-</div>`).join('')}`).join(’’);
+  listEl.innerHTML = Object.entries(porData)
+    .sort((x,y) => y[0].localeCompare(x[0]))
+    .map(([data, regs]) => `
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:4px 2px;margin-top:4px">${fmtData(data)}</div>
+      ${regs.map(r => `
+        <div class="registro-card">
+          <div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
+          <div class="registro-body">
+            <div class="registro-nome">${a.nome}${r.tipo ? ' · <span style="font-size:11px;color:var(--text2)">' + r.tipo + '</span>' : ''}</div>
+            <div class="registro-meta">${buildMeta(r, a)}</div>
+          </div>
+          <div class="registro-actions">
+            <button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
+            <button class="registro-action-btn del" onclick="deletarRegistroDetalhe('${r.id}')">🗑</button>
+          </div>
+        </div>`).join('')}`).join('');
 }
 
 function deletarRegistroDetalhe(id) {
-if (!confirm(‘Excluir este registro?’)) return;
-registros = registros.filter(r => r.id !== id);
-deletarRegFirestore(id);
-renderDetalheAtividade();
-renderCalendario();
-renderGreeting();
-renderToday();
+  if (!confirm('Excluir este registro?')) return;
+  registros = registros.filter(r => r.id !== id);
+  deletarRegFirestore(id);
+  renderDetalheAtividade();
+  renderCalendario();
+  renderGreeting();
+  renderToday();
 }
 
 function deletarAtividade(id) {
-if (!confirm(‘Deletar esta atividade?’)) return;
-atividades = atividades.filter(a => a.id !== id);
-deletarAtivFirestore(id);
-renderAtividades();
+  if (!confirm('Deletar esta atividade?')) return;
+  atividades = atividades.filter(a => a.id !== id);
+  deletarAtivFirestore(id);
+  renderAtividades();
 }
 
 // ── PROGRESSO DE METAS ───────────────────────────────
 function buildProgresso(a) {
-if (!a.metaQtd || !a.metaTipo) return ‘’;
+  if (!a.metaQtd || !a.metaTipo) return '';
 
-const agora = new Date();
-let regsAtiv;
-if (a.metaTipo === ‘anual’) {
-const ano = agora.getFullYear();
-regsAtiv = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(ano));
-} else {
-const ano = agora.getFullYear();
-const mes = String(agora.getMonth()+1).padStart(2,‘0’);
-regsAtiv = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(`${ano}-${mes}`));
-}
+  const agora = new Date();
+  let regsAtiv;
+  if (a.metaTipo === 'anual') {
+    const ano = agora.getFullYear();
+    regsAtiv = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(ano));
+  } else {
+    const ano = agora.getFullYear();
+    const mes = String(agora.getMonth()+1).padStart(2,'0');
+    regsAtiv = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(`${ano}-${mes}`));
+  }
 
-const feitos = regsAtiv.length;
-const pct    = Math.min(100, Math.round((feitos / a.metaQtd) * 100));
-const label  = a.metaTipo === ‘anual’ ? ‘este ano’ : ‘este mês’;
+  const feitos = regsAtiv.length;
+  const pct    = Math.min(100, Math.round((feitos / a.metaQtd) * 100));
+  const label  = a.metaTipo === 'anual' ? 'este ano' : 'este mês';
 
-return ` <div style="margin-top:8px"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"> <span style="font-size:11px;color:var(--text2);font-weight:500">${feitos}/${a.metaQtd} ${label}</span> <span style="font-size:11px;font-weight:700;color:${a.cor}">${pct}%</span> </div> <div style="height:5px;background:var(--surface3);border-radius:99px;overflow:hidden"> <div style="height:100%;width:${pct}%;background:${a.cor};border-radius:99px;transition:width 0.4s"></div> </div> </div>`;
+  return `
+    <div style="margin-top:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:11px;color:var(--text2);font-weight:500">${feitos}/${a.metaQtd} ${label}</span>
+        <span style="font-size:11px;font-weight:700;color:${a.cor}">${pct}%</span>
+      </div>
+      <div style="height:5px;background:var(--surface3);border-radius:99px;overflow:hidden">
+        <div style="height:100%;width:${pct}%;background:${a.cor};border-radius:99px;transition:width 0.4s"></div>
+      </div>
+    </div>`;
 }
 
 // ── RENDER ATIVIDADES ────────────────────────────────
 function renderAtividades() {
-const list = document.getElementById(‘ativList’);
-if (!atividades.length) {
-list.innerHTML = ` <div class="ativ-empty"> <div class="ativ-empty-icon">⚡</div> <div class="ativ-empty-text">Nenhuma atividade criada ainda</div> <div class="ativ-empty-sub">Toque no + para criar sua primeira</div> </div>`;
+  const list = document.getElementById('ativList');
+  if (!atividades.length) {
+    list.innerHTML = `
+      <div class="ativ-empty">
+        <div class="ativ-empty-icon">⚡</div>
+        <div class="ativ-empty-text">Nenhuma atividade criada ainda</div>
+        <div class="ativ-empty-sub">Toque no + para criar sua primeira</div>
+      </div>`;
 
-```
-// FAB na tela de atividades abre modal de atividade
-return;
-```
+    // FAB na tela de atividades abre modal de atividade
+    return;
+  }
 
-}
-
-list.innerHTML = atividades.map(a => {
-const agora   = new Date();
-const anoStr  = String(agora.getFullYear());
-const mesStr  = anoStr + ‘-’ + String(agora.getMonth()+1).padStart(2,‘0’);
-const regsAno = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(anoStr)).length;
-const regsMes = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(mesStr)).length;
-const progressoHtml = buildProgresso(a);
-return ` <div class="ativ-card" onclick="abrirDetalheAtividade('${a.id}')" style="cursor:pointer"> <div class="ativ-icon-wrap" style="background:${a.cor}20">${a.emoji}</div> <div class="ativ-body"> <div style="display:flex;align-items:center;gap:8px"> <div class="ativ-nome">${a.nome}</div> </div> <div class="ativ-metricas">${a.metricas.map(m=>METRICAS_LABELS[m]).join(' · ')}</div> <div style="display:flex;gap:10px;margin-top:5px"> <span style="font-size:11px;font-weight:700;color:${a.cor}">${regsAno} este ano</span> <span style="font-size:11px;color:var(--text3)">·</span> <span style="font-size:11px;color:var(--text2)">${regsMes} este mês</span> </div> ${progressoHtml} </div> <div class="ativ-actions" onclick="event.stopPropagation()"> <button class="ativ-action-btn" onclick="abrirModalAtividade('${a.id}')">✏️</button> <button class="ativ-action-btn del" onclick="deletarAtividade('${a.id}')">🗑</button> </div> </div>`;
-}).join(’’);
+  list.innerHTML = atividades.map(a => {
+    const agora   = new Date();
+    const anoStr  = String(agora.getFullYear());
+    const mesStr  = anoStr + '-' + String(agora.getMonth()+1).padStart(2,'0');
+    const regsAno = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(anoStr)).length;
+    const regsMes = registros.filter(r => r.atividadeId === a.id && r.data.startsWith(mesStr)).length;
+    const progressoHtml = buildProgresso(a);
+    return `
+    <div class="ativ-card" onclick="abrirDetalheAtividade('${a.id}')" style="cursor:pointer">
+      <div class="ativ-icon-wrap" style="background:${a.cor}20">${a.emoji}</div>
+      <div class="ativ-body">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="ativ-nome">${a.nome}</div>
+        </div>
+        <div class="ativ-metricas">${a.metricas.map(m=>METRICAS_LABELS[m]).join(' · ')}</div>
+        <div style="display:flex;gap:10px;margin-top:5px">
+          <span style="font-size:11px;font-weight:700;color:${a.cor}">${regsAno} este ano</span>
+          <span style="font-size:11px;color:var(--text3)">·</span>
+          <span style="font-size:11px;color:var(--text2)">${regsMes} este mês</span>
+        </div>
+        ${progressoHtml}
+      </div>
+      <div class="ativ-actions" onclick="event.stopPropagation()">
+        <button class="ativ-action-btn" onclick="abrirModalAtividade('${a.id}')">✏️</button>
+        <button class="ativ-action-btn del" onclick="deletarAtividade('${a.id}')">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 // FAB comportamento por tela
-document.getElementById(‘fabBtn’).addEventListener(‘click’, () => {
-const ativScreen = document.getElementById(‘screen-ativ’);
-if (ativScreen.classList.contains(‘active’)) {
-abrirModalAtividade(null);
-} else {
-abrirModalRegistro(null);
-}
+document.getElementById('fabBtn').addEventListener('click', () => {
+  const ativScreen = document.getElementById('screen-ativ');
+  if (ativScreen.classList.contains('active')) {
+    abrirModalAtividade(null);
+  } else {
+    abrirModalRegistro(null);
+  }
 });
 
 // ── RESUMO ───────────────────────────────────────────
 const PERIODOS = [
-{ id: ‘hoje’,   label: ‘Hoje’       },
-{ id: ‘semana’, label: ‘7 dias’     },
-{ id: ‘mes’,    label: ‘Este mês’   },
-{ id: ‘ano’,    label: ‘Este ano’   },
-{ id: ‘custom’, label: ‘Período…’ },
+  { id: 'hoje',   label: 'Hoje'       },
+  { id: 'semana', label: '7 dias'     },
+  { id: 'mes',    label: 'Este mês'   },
+  { id: 'ano',    label: 'Este ano'   },
+  { id: 'custom', label: 'Período...' },
 ];
 
 function setPeriodo(p) {
-_periodoSel = p;
-const customEl = document.getElementById(‘periodoCustom’);
-if (customEl) customEl.style.display = p === ‘custom’ ? ‘block’ : ‘none’;
-renderResumo();
+  _periodoSel = p;
+  const customEl = document.getElementById('periodoCustom');
+  if (customEl) customEl.style.display = p === 'custom' ? 'block' : 'none';
+  renderResumo();
 }
 
 function setHistFilter(f) {
-_histFilter = f;
-_filtroModal = ‘all’;
-renderResumo();
+  _histFilter = f;
+  _filtroModal = 'all';
+  renderResumo();
 }
 
 function setFiltroModal(m) {
-_filtroModal = m;
-renderResumo();
+  _filtroModal = m;
+  renderResumo();
 }
 
 function getFiltroRange() {
-const agora = new Date();
-const hj = hoje();
-if (_periodoSel === ‘hoje’)   return { de: hj, ate: hj };
-if (_periodoSel === ‘semana’) {
-const d = new Date(); d.setDate(d.getDate() - 6);
-return { de: fmtISO(d), ate: hj };
-}
-if (_periodoSel === ‘mes’) {
-const y = agora.getFullYear(), m = String(agora.getMonth()+1).padStart(2,‘0’);
-return { de: `${y}-${m}-01`, ate: hj };
-}
-if (_periodoSel === ‘ano’) {
-return { de: `${agora.getFullYear()}-01-01`, ate: hj };
-}
-if (_periodoSel === ‘custom’) {
-const de  = document.getElementById(‘filtroDataDe’)?.value  || ‘’;
-const ate = document.getElementById(‘filtroDataAte’)?.value || hj;
-return { de, ate };
-}
-return { de: ‘’, ate: hj };
+  const agora = new Date();
+  const hj = hoje();
+  if (_periodoSel === 'hoje')   return { de: hj, ate: hj };
+  if (_periodoSel === 'semana') {
+    const d = new Date(); d.setDate(d.getDate() - 6);
+    return { de: fmtISO(d), ate: hj };
+  }
+  if (_periodoSel === 'mes') {
+    const y = agora.getFullYear(), m = String(agora.getMonth()+1).padStart(2,'0');
+    return { de: `${y}-${m}-01`, ate: hj };
+  }
+  if (_periodoSel === 'ano') {
+    return { de: `${agora.getFullYear()}-01-01`, ate: hj };
+  }
+  if (_periodoSel === 'custom') {
+    const de  = document.getElementById('filtroDataDe')?.value  || '';
+    const ate = document.getElementById('filtroDataAte')?.value || hj;
+    return { de, ate };
+  }
+  return { de: '', ate: hj };
 }
 
 function fmtISO(d) {
-return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
 function renderResumo() {
-// Chips de período
-const periodoEl = document.getElementById(‘periodoOpts’);
-if (periodoEl) {
-periodoEl.innerHTML = PERIODOS.map(p => ` <div class="toggle-opt${_periodoSel===p.id?' selected':''}" onclick="setPeriodo('${p.id}')">${p.label}</div>`).join(’’);
-}
-const customEl = document.getElementById(‘periodoCustom’);
-if (customEl) customEl.style.display = _periodoSel === ‘custom’ ? ‘block’ : ‘none’;
+  // Chips de período
+  const periodoEl = document.getElementById('periodoOpts');
+  if (periodoEl) {
+    periodoEl.innerHTML = PERIODOS.map(p => `
+      <div class="toggle-opt${_periodoSel===p.id?' selected':''}"
+        onclick="setPeriodo('${p.id}')">${p.label}</div>`).join('');
+  }
+  const customEl = document.getElementById('periodoCustom');
+  if (customEl) customEl.style.display = _periodoSel === 'custom' ? 'block' : 'none';
 
-// Chips de atividade
-const filtersEl = document.getElementById(‘histFilters’);
-if (filtersEl) {
-const chips = [`<div class="filter-chip${_histFilter==='all'?' active':''}" onclick="setHistFilter('all')">Todas</div>`];
-atividades.forEach(a => {
-chips.push(`<div class="filter-chip${_histFilter===a.id?' active':''}" onclick="setHistFilter('${a.id}')">${a.emoji} ${a.nome}</div>`);
-});
-filtersEl.innerHTML = chips.join(’’);
-}
+  // Chips de atividade
+  const filtersEl = document.getElementById('histFilters');
+  if (filtersEl) {
+    const chips = [`<div class="filter-chip${_histFilter==='all'?' active':''}"
+      onclick="setHistFilter('all')">Todas</div>`];
+    atividades.forEach(a => {
+      chips.push(`<div class="filter-chip${_histFilter===a.id?' active':''}"
+        onclick="setHistFilter('${a.id}')">${a.emoji} ${a.nome}</div>`);
+    });
+    filtersEl.innerHTML = chips.join('');
+  }
 
-// Filtro de modalidade (só aparece se atividade selecionada)
-const modalidadeWrap = document.getElementById(‘modalidadeFiltroWrap’);
-const modalidadeOpts = document.getElementById(‘modalidadeFiltroOpts’);
-if (_histFilter !== ‘all’) {
-const aFilt = atividades.find(a => a.id === _histFilter);
-if (aFilt?.tipos?.length) {
-modalidadeWrap.style.display = ‘block’;
-const chips = [`<div class="filter-chip${_filtroModal==='all'?' active':''}" onclick="setFiltroModal('all')">Todas</div>`];
-aFilt.tipos.forEach(t => {
-chips.push(`<div class="filter-chip${_filtroModal===t?' active':''}" onclick="setFiltroModal('${t}')">${t}</div>`);
-});
-modalidadeOpts.innerHTML = chips.join(’’);
-} else {
-modalidadeWrap.style.display = ‘none’;
-}
-} else {
-modalidadeWrap.style.display = ‘none’;
-_filtroModal = ‘all’;
-}
+  // Filtro de modalidade (só aparece se atividade selecionada)
+  const modalidadeWrap = document.getElementById('modalidadeFiltroWrap');
+  const modalidadeOpts = document.getElementById('modalidadeFiltroOpts');
+  if (_histFilter !== 'all') {
+    const aFilt = atividades.find(a => a.id === _histFilter);
+    if (aFilt?.tipos?.length) {
+      modalidadeWrap.style.display = 'block';
+      const chips = [`<div class="filter-chip${_filtroModal==='all'?' active':''}" onclick="setFiltroModal('all')">Todas</div>`];
+      aFilt.tipos.forEach(t => {
+        chips.push(`<div class="filter-chip${_filtroModal===t?' active':''}" onclick="setFiltroModal('${t}')">${t}</div>`);
+      });
+      modalidadeOpts.innerHTML = chips.join('');
+    } else {
+      modalidadeWrap.style.display = 'none';
+    }
+  } else {
+    modalidadeWrap.style.display = 'none';
+    _filtroModal = 'all';
+  }
 
-// Aplica filtros
-const { de, ate } = getFiltroRange();
-const filtered = registros.filter(r => {
-const dentroData = (!de || r.data >= de) && (!ate || r.data <= ate);
-const dentroAtiv = _histFilter === ‘all’ || r.atividadeId === _histFilter;
-const dentroModal = _filtroModal === ‘all’ || r.tipo === _filtroModal;
-return dentroData && dentroAtiv && dentroModal;
-});
+  // Aplica filtros
+  const { de, ate } = getFiltroRange();
+  const filtered = registros.filter(r => {
+    const dentroData = (!de || r.data >= de) && (!ate || r.data <= ate);
+    const dentroAtiv = _histFilter === 'all' || r.atividadeId === _histFilter;
+    const dentroModal = _filtroModal === 'all' || r.tipo === _filtroModal;
+    return dentroData && dentroAtiv && dentroModal;
+  });
 
-// Totais
-const totaisEl = document.getElementById(‘histTotais’);
-const totalRegs = filtered.length;
-const totalMin  = filtered.reduce((s,r) => s + (parseFloat(r.duracao)||0), 0);
-const totalKm   = filtered.reduce((s,r) => s + (parseFloat(r.distancia)||0), 0);
-const totalDias = new Set(filtered.map(r => r.data)).size;
+  // Totais
+  const totaisEl = document.getElementById('histTotais');
+  const totalRegs = filtered.length;
+  const totalMin  = filtered.reduce((s,r) => s + (parseFloat(r.duracao)||0), 0);
+  const totalKm   = filtered.reduce((s,r) => s + (parseFloat(r.distancia)||0), 0);
+  const totalDias = new Set(filtered.map(r => r.data)).size;
 
-let totHtml = ` <div class="total-chip"><div class="total-chip-val">${totalRegs}</div><div class="total-chip-label">atividades</div></div> <div class="total-chip"><div class="total-chip-val">${totalDias}</div><div class="total-chip-label">dias ativos</div></div>`;
-if (totalMin) {
-const hh = String(Math.floor(totalMin / 60)).padStart(2,‘0’);
-const mm = String(totalMin % 60).padStart(2,‘0’);
-totHtml += `<div class="total-chip"><div class="total-chip-val">${hh}:${mm}</div><div class="total-chip-label">horas de treino</div></div>`;
-}
-if (totalKm)  totHtml += `<div class="total-chip"><div class="total-chip-val">${totalKm.toFixed(1)}km</div><div class="total-chip-label">percorridos</div></div>`;
-if (totaisEl) totaisEl.innerHTML = totHtml;
+  let totHtml = `
+    <div class="total-chip"><div class="total-chip-val">${totalRegs}</div><div class="total-chip-label">atividades</div></div>
+    <div class="total-chip"><div class="total-chip-val">${totalDias}</div><div class="total-chip-label">dias ativos</div></div>`;
+  if (totalMin) {
+    const hh = String(Math.floor(totalMin / 60)).padStart(2,'0');
+    const mm = String(totalMin % 60).padStart(2,'0');
+    totHtml += `<div class="total-chip"><div class="total-chip-val">${hh}:${mm}</div><div class="total-chip-label">horas de treino</div></div>`;
+  }
+  if (totalKm)  totHtml += `<div class="total-chip"><div class="total-chip-val">${totalKm.toFixed(1)}km</div><div class="total-chip-label">percorridos</div></div>`;
+  if (totaisEl) totaisEl.innerHTML = totHtml;
 
-// Lista
-const listEl = document.getElementById(‘histList’);
-if (!listEl) return;
+  // Lista
+  const listEl = document.getElementById('histList');
+  if (!listEl) return;
 
-if (!filtered.length) {
-listEl.innerHTML = `<div class="hist-empty"><div class="hist-empty-icon">📊</div>Nenhum registro neste período</div>`;
-return;
-}
+  if (!filtered.length) {
+    listEl.innerHTML = `<div class="hist-empty"><div class="hist-empty-icon">📊</div>Nenhum registro neste período</div>`;
+    return;
+  }
 
-const porData = {};
-filtered.forEach(r => {
-if (!porData[r.data]) porData[r.data] = [];
-porData[r.data].push(r);
-});
+  const porData = {};
+  filtered.forEach(r => {
+    if (!porData[r.data]) porData[r.data] = [];
+    porData[r.data].push(r);
+  });
 
-listEl.innerHTML = Object.entries(porData)
-.sort((a,b) => b[0].localeCompare(a[0]))
-.map(([data, regs]) => `<div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:4px 2px;margin-top:4px">${fmtData(data)}</div> ${regs.map(r => { const a = atividades.find(a => a.id === r.atividadeId); if (!a) return ''; return`<div class="registro-card">
-<div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
-<div class="registro-body">
-<div class="registro-nome">${a.nome}</div>
-<div class="registro-meta">${buildMeta(r, a)}</div>
-</div>
-<div class="registro-actions">
-<button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
-<button class="registro-action-btn del" onclick="deletarRegistroHist('${r.id}')">🗑</button>
-</div>
-</div>`; }).join('')}`).join(’’);
+  listEl.innerHTML = Object.entries(porData)
+    .sort((a,b) => b[0].localeCompare(a[0]))
+    .map(([data, regs]) => `
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:4px 2px;margin-top:4px">${fmtData(data)}</div>
+      ${regs.map(r => {
+        const a = atividades.find(a => a.id === r.atividadeId);
+        if (!a) return '';
+        return `<div class="registro-card">
+          <div class="registro-color" style="background:${a.cor}20">${a.emoji}</div>
+          <div class="registro-body">
+            <div class="registro-nome">${a.nome}</div>
+            <div class="registro-meta">${buildMeta(r, a)}</div>
+          </div>
+          <div class="registro-actions">
+            <button class="registro-action-btn" onclick="editarRegistro('${r.id}')">✏️</button>
+            <button class="registro-action-btn del" onclick="deletarRegistroHist('${r.id}')">🗑</button>
+          </div>
+        </div>`;
+      }).join('')}`).join('');
 }
 
 function deletarRegistroHist(id) {
-if (!confirm(‘Deletar este registro?’)) return;
-registros = registros.filter(r => r.id !== id);
-deletarRegFirestore(id);
-renderResumo();
-renderCalendario();
-renderGreeting();
+  if (!confirm('Deletar este registro?')) return;
+  registros = registros.filter(r => r.id !== id);
+  deletarRegFirestore(id);
+  renderResumo();
+  renderCalendario();
+  renderGreeting();
 }
+
 
 // ── EXPORT CSV ───────────────────────────────────────
 function exportCSV() {
-const { de, ate } = getFiltroRange();
-const paraExportar = registros.filter(r => {
-const dentroData = (!de || r.data >= de) && (!ate || r.data <= ate);
-const dentroAtiv = _histFilter === ‘all’ || r.atividadeId === _histFilter;
-return dentroData && dentroAtiv;
-});
-if (!paraExportar.length) { alert(‘Nenhum registro para exportar.’); return; }
-const header = [‘Data’,‘Atividade’,‘Tipo’,‘Duração (min)’,‘Distância (km)’,‘Intensidade’,‘Humor’,‘Nota’];
-const rows = paraExportar.map(r => {
-const a = atividades.find(a => a.id === r.atividadeId);
-return [
-fmtData(r.data),
-a?.nome || ‘’,
-r.tipo || ‘’,
-r.duracao || ‘’,
-r.distancia || ‘’,
-r.intensidade || ‘’,
-r.humor || ‘’,
-r.nota ? `"${r.nota.replace(/"/g,'""')}"` : ‘’,
-].join(’,’);
-});
-const csv = [header.join(’,’), …rows].join(’\n’);
-const blob = new Blob([’\uFEFF’ + csv], { type: ‘text/csv;charset=utf-8’ });
-const url = URL.createObjectURL(blob);
-const a = document.createElement(‘a’);
-a.href = url; a.download = `atividades-${de||'tudo'}-${ate}.csv`; a.click();
-URL.revokeObjectURL(url);
+  const { de, ate } = getFiltroRange();
+  const paraExportar = registros.filter(r => {
+    const dentroData = (!de || r.data >= de) && (!ate || r.data <= ate);
+    const dentroAtiv = _histFilter === 'all' || r.atividadeId === _histFilter;
+    return dentroData && dentroAtiv;
+  });
+  if (!paraExportar.length) { alert('Nenhum registro para exportar.'); return; }
+  const header = ['Data','Atividade','Tipo','Duração (min)','Distância (km)','Intensidade','Humor','Nota'];
+  const rows = paraExportar.map(r => {
+    const a = atividades.find(a => a.id === r.atividadeId);
+    return [
+      fmtData(r.data),
+      a?.nome || '',
+      r.tipo || '',
+      r.duracao || '',
+      r.distancia || '',
+      r.intensidade || '',
+      r.humor || '',
+      r.nota ? `"${r.nota.replace(/"/g,'""')}"` : '',
+    ].join(',');
+  });
+  const csv = [header.join(','), ...rows].join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `atividades-${de||'tudo'}-${ate}.csv`; a.click();
+  URL.revokeObjectURL(url);
 }
 
 // ── MODAIS ───────────────────────────────────────────
 function abrirModal(id) {
-document.getElementById(id).classList.add(‘open’);
+  document.getElementById(id).classList.add('open');
 }
 function fecharModal(id) {
-document.getElementById(id).classList.remove(‘open’);
+  document.getElementById(id).classList.remove('open');
 }
 
 // Fecha modal clicando no overlay
-document.querySelectorAll(’.modal-overlay’).forEach(overlay => {
-overlay.addEventListener(‘click’, e => {
-if (e.target === overlay) overlay.classList.remove(‘open’);
-});
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
 });
 
 // ── PERSISTÊNCIA ────────────────────────────────────
 async function salvarAtivFirestore(ativ) {
-const uid = window._fb?.currentUser?.uid;
-if (!uid) { console.error(‘salvarAtivFirestore: usuário não logado’); return; }
-await window._fb.fsSalvarAtividade(uid, ativ);
+  const uid = window._fb?.currentUser?.uid;
+  if (!uid) { console.error('salvarAtivFirestore: usuário não logado'); return; }
+  await window._fb.fsSalvarAtividade(uid, ativ);
 }
 async function deletarAtivFirestore(id) {
-const uid = window._fb?.currentUser?.uid;
-if (uid) await window._fb.fsDeletarAtividade(uid, id);
+  const uid = window._fb?.currentUser?.uid;
+  if (uid) await window._fb.fsDeletarAtividade(uid, id);
 }
 async function salvarRegFirestore(reg) {
-const uid = window._fb?.currentUser?.uid;
-if (!uid) { console.error(‘salvarRegFirestore: usuário não logado’); return; }
-await window._fb.fsSalvarRegistro(uid, reg);
+  const uid = window._fb?.currentUser?.uid;
+  if (!uid) { console.error('salvarRegFirestore: usuário não logado'); return; }
+  await window._fb.fsSalvarRegistro(uid, reg);
 }
 async function deletarRegFirestore(id) {
-const uid = window._fb?.currentUser?.uid;
-if (uid) await window._fb.fsDeletarRegistro(uid, id);
+  const uid = window._fb?.currentUser?.uid;
+  if (uid) await window._fb.fsDeletarRegistro(uid, id);
 }
 function salvarDados() {
-// Mantido para compatibilidade — dados salvos via funções específicas
+  // Mantido para compatibilidade — dados salvos via funções específicas
 }
 
 // ── RESET COMPLETO ──────────────────────────────────
 async function confirmarReset() {
-const ok = confirm(‘Tem certeza? Isso vai apagar TODAS as atividades e registros da sua conta. Essa ação não pode ser desfeita.’);
-if (!ok) return;
-const ok2 = confirm(‘Confirma mesmo? Todos os dados serão perdidos permanentemente.’);
-if (!ok2) return;
+  const ok = confirm('Tem certeza? Isso vai apagar TODAS as atividades e registros da sua conta. Essa ação não pode ser desfeita.');
+  if (!ok) return;
+  const ok2 = confirm('Confirma mesmo? Todos os dados serão perdidos permanentemente.');
+  if (!ok2) return;
 
-const uid = window._fb?.currentUser?.uid;
-if (!uid) { alert(‘Erro: usuário não identificado.’); return; }
+  const uid = window._fb?.currentUser?.uid;
+  if (!uid) { alert('Erro: usuário não identificado.'); return; }
 
-try {
-// Feedback visual
-const btn = document.querySelector(’[onclick=“confirmarReset()”]’);
-if (btn) { btn.textContent = ‘⏳ Apagando…’; btn.disabled = true; }
+  try {
+    // Feedback visual
+    const btn = document.querySelector('[onclick="confirmarReset()"]');
+    if (btn) { btn.textContent = '⏳ Apagando...'; btn.disabled = true; }
 
-```
-await window._fb.fsLimparTudo(uid);
+    await window._fb.fsLimparTudo(uid);
 
-atividades = [];
-registros  = [];
+    atividades = [];
+    registros  = [];
 
-renderAtividades();
-renderCalendario();
-renderToday();
-renderGreeting();
+    renderAtividades();
+    renderCalendario();
+    renderToday();
+    renderGreeting();
 
-if (btn) { btn.textContent = '✓ Dados apagados'; btn.style.borderColor = 'var(--good)'; btn.style.color = 'var(--good)'; }
-setTimeout(() => {
-  if (btn) { btn.textContent = '🗑 Apagar todos os dados'; btn.style.borderColor = 'var(--bad)'; btn.style.color = 'var(--bad)'; btn.disabled = false; }
-}, 3000);
-```
-
-} catch(e) {
-console.error(‘Erro ao resetar:’, e);
-alert(‘Erro ao apagar os dados. Tente novamente.’);
-}
+    if (btn) { btn.textContent = '✓ Dados apagados'; btn.style.borderColor = 'var(--good)'; btn.style.color = 'var(--good)'; }
+    setTimeout(() => {
+      if (btn) { btn.textContent = '🗑 Apagar todos os dados'; btn.style.borderColor = 'var(--bad)'; btn.style.color = 'var(--bad)'; btn.disabled = false; }
+    }, 3000);
+  } catch(e) {
+    console.error('Erro ao resetar:', e);
+    alert('Erro ao apagar os dados. Tente novamente.');
+  }
 }
 
 // ── START ─────────────────────────────────────────────
 init();
 </script>
-
 </body>
 </html>
