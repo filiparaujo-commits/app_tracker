@@ -941,16 +941,17 @@ textarea { resize: none; min-height: 72px; }
   onAuthStateChanged(auth, async (user) => {
     window._fb.currentUser = user;
     if (user) {
-      // Carrega dados do Firestore
       try {
         const [ativs, regs] = await Promise.all([
           fsCarregarAtividades(user.uid),
           fsCarregarRegistros(user.uid),
         ]);
+        console.log(`Firestore: ${ativs.length} atividades, ${regs.length} registros carregados`);
         window._appOnLogin(user, ativs, regs);
       } catch(e) {
-        console.error('Erro ao carregar dados:', e);
-        window._appOnLogin(user, [], []);
+        console.error('Erro ao carregar dados do Firestore:', e);
+        // NÃO passa [] — mostra erro para o usuário em vez de limpar os dados
+        window._appOnLoginErro(user, e);
       }
     } else {
       window._appOnLogout();
@@ -1353,6 +1354,16 @@ window._appOnLogout = function() {
   document.getElementById('app').style.display            = 'none';
   document.getElementById('loadingOverlay').style.display = 'none';
   document.getElementById('loginScreen').style.display    = 'flex';
+};
+
+window._appOnLoginErro = function(user, erro) {
+  // Carregamento falhou — mostra o app mas sem dados, com aviso
+  document.getElementById('loginScreen').style.display    = 'none';
+  document.getElementById('loadingOverlay').style.display = 'none';
+  document.getElementById('app').style.display            = 'flex';
+  aplicarTema(tema);
+  init();
+  alert('Não foi possível carregar seus dados. Verifique sua conexão e recarregue a página.');
 };
 
 function fazerLogin() {
@@ -2071,7 +2082,7 @@ function deletarRegistroDetalhe(id) {
 function deletarAtividade(id) {
   if (!confirm('Deletar esta atividade?')) return;
   atividades = atividades.filter(a => a.id !== id);
-  salvarDados();
+  deletarAtivFirestore(id);
   renderAtividades();
 }
 
