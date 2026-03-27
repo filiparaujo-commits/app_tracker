@@ -871,7 +871,7 @@ textarea { resize: none; min-height: 72px; }
 <!-- Firebase -->
 <script type="module">
   import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
                               from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
   import { getFirestore, collection, doc, addDoc, getDocs, setDoc, deleteDoc, query, orderBy, writeBatch }
                               from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -927,12 +927,15 @@ textarea { resize: none; min-height: 72px; }
 
   // ── Expõe globalmente ────────────────────────────────
   window._fb = {
-    auth, provider, signInWithPopup, signOut,
+    auth, provider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut,
     currentUser: null,
     fsCarregarAtividades, fsCarregarRegistros,
     fsSalvarAtividade, fsDeletarAtividade,
     fsSalvarRegistro, fsDeletarRegistro, fsLimparTudo,
   };
+
+  // ── Trata retorno de redirect (mobile) ──────────────
+  getRedirectResult(auth).catch(e => console.error('Redirect result error:', e));
 
   // ── Auth state ───────────────────────────────────────
   onAuthStateChanged(auth, async (user) => {
@@ -1357,13 +1360,28 @@ function fazerLogin() {
   document.getElementById('loginScreen').style.display    = 'none';
   document.getElementById('loadingOverlay').style.display = 'flex';
   window._fb.provider.setCustomParameters({ prompt: 'select_account' });
-  window._fb.signInWithPopup(window._fb.auth, window._fb.provider)
-    .catch(e => {
-      console.error(e);
-      document.getElementById('loadingOverlay').style.display = 'none';
-      document.getElementById('loginScreen').style.display    = 'flex';
-      alert('Erro ao fazer login. Tente novamente.');
-    });
+
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // Mobile: redirect (mais confiável, sem bloqueio de popup)
+    window._fb.signInWithRedirect(window._fb.auth, window._fb.provider)
+      .catch(e => {
+        console.error(e);
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('loginScreen').style.display    = 'flex';
+        alert('Erro ao fazer login. Tente novamente.');
+      });
+  } else {
+    // Desktop: popup
+    window._fb.signInWithPopup(window._fb.auth, window._fb.provider)
+      .catch(e => {
+        console.error(e);
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('loginScreen').style.display    = 'flex';
+        alert('Erro ao fazer login. Tente novamente.');
+      });
+  }
 }
 
 function fazerLogout() {
@@ -1931,9 +1949,10 @@ function salvarAtividade() {
     atividades.push(ativ);
   }
 
-  salvarDados();
+  salvarAtivFirestore(ativ).catch(e => console.error('Erro ao salvar atividade:', e));
   fecharModal('modalAtiv');
   renderAtividades();
+  if (_detailAtivId === ativ.id) renderDetalheAtividade();
 }
 
 function abrirDetalheAtividade(id) {
